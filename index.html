@@ -1,0 +1,460 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="醫院建院 40 周年大事記暨週年手冊">
+  <title>四十載守護，初心如一｜建院 40 周年紀念</title>
+
+  <!-- =====================================================
+       Step 1｜基礎框架
+       全站唯一樣式表，不使用行內 style
+  ====================================================== -->
+  <link rel="stylesheet" href="css/style.css">
+
+  <!-- Step 5｜DearFlip 翻頁書樣式（本地版本，不使用 CDN）-->
+  <link rel="stylesheet" href="libs/dflip.min.css">
+</head>
+<body>
+
+  <!-- =====================================================
+       Step 2｜Header：固定頂部導覽列
+       捲動後由透明漸變為深藍背景（由 JS 控制 .scrolled class）
+  ====================================================== -->
+  <header id="site-header">
+    <div class="header-inner container">
+
+      <!-- 院名 / Logo 區 -->
+      <div class="site-logo">
+        <span class="logo-name">花蓮慈濟醫院</span>
+        <span class="logo-badge">建院 40 周年</span>
+      </div>
+
+      <!-- 主導覽 -->
+      <nav class="main-nav" aria-label="主要導覽">
+        <ul>
+          <li><a href="#hero">首頁</a></li>
+          <li><a href="#timeline">大事記</a></li>
+          <li><a href="#flipbook">週年手冊</a></li>
+          <li><a href="#history">歲月留影</a></li>
+          <li><a href="#archive">典藏特刊</a></li>
+        </ul>
+      </nav>
+
+      <!-- 手機版漢堡選單按鈕 -->
+      <button class="nav-toggle" aria-label="開啟選單" aria-expanded="false">
+        <span></span><span></span><span></span>
+      </button>
+
+    </div>
+  </header>
+
+
+  <!-- =====================================================
+       Step 2｜Hero Section
+       主視覺：院景全景圖 + 大標語
+       背景圖請置換 images/hero-panorama.webp（JPEG fallback：hero-panorama.jpg）
+  ====================================================== -->
+  <section id="hero" aria-label="主視覺">
+
+    <!-- 背景圖以 <picture> 提供 WebP / JPEG 雙格式 -->
+    <picture class="hero-bg-picture">
+      <source srcset="images/hero-panorama.webp" type="image/webp">
+      <img
+        src="images/hero-panorama.jpg"
+        alt="醫院全景"
+        class="hero-bg-img"
+        loading="eager"
+      ><!-- Hero 為首屏，刻意不用 lazy -->
+    </picture>
+
+    <!-- 遮罩層：讓文字在任何背景圖上都清晰可讀 -->
+    <div class="hero-overlay" aria-hidden="true"></div>
+
+    <!-- 主文字內容 -->
+    <div class="hero-content container">
+      <p class="hero-eyebrow">建院 40 周年紀念</p>
+      <h1 class="hero-title">四十載守護，初心如一</h1>
+      <p class="hero-desc">感謝每一位陪伴我們走過四十年的病患、家屬與醫療夥伴。</p>
+      <a href="#timeline" class="btn btn--gold btn--lg">探索 40 年大事記</a>
+    </div>
+
+    <!-- 向下捲動提示箭頭 -->
+    <a href="#timeline" class="scroll-hint" aria-label="向下捲動">
+      <span class="scroll-hint__arrow" aria-hidden="true"></span>
+    </a>
+
+  </section>
+
+
+  <!-- =====================================================
+       Step 3｜Timeline Section
+       垂直交錯時間軸：奇數項卡片在右、偶數項在左
+       捲動動畫：.fade-up + IntersectionObserver（main.js）
+       data-delay：同批次進場的錯位延遲（ms）
+  ====================================================== -->
+  <section id="timeline" class="section" aria-label="大事記時間軸">
+    <div class="container">
+      <h2 class="section-title fade-up" data-delay="0">四十年大事記</h2>
+      <p class="section-subtitle fade-up" data-delay="80">Walking Through Four Decades</p>
+
+      <div class="timeline" id="timeline-track">
+
+        <!-- ── 1986｜創院 ─────────────────────────── -->
+        <article class="timeline-item fade-up" data-delay="0">
+          <div class="timeline-axis">
+            <div class="timeline-year-badge">1986</div>
+          </div>
+          <div class="timeline-card">
+            <div class="timeline-card__img-wrap">
+              <picture>
+                <source srcset="images/1986-founding.webp" type="image/webp">
+                <img
+                  src="images/1986-founding.jpg"
+                  alt="1986 年創院紀念照"
+                  class="timeline-card__img"
+                  loading="lazy"
+                >
+              </picture>
+            </div>
+            <div class="timeline-card__body">
+              <span class="timeline-card__tag">創院</span>
+              <h3 class="timeline-card__title">篳路藍縷，守護地方醫療</h3>
+              <p class="timeline-card__text">
+                民國 75 年，本院於地方仕紳與醫療先驅的共同心血下正式創立，以「在地、親民、全人」為宗旨。
+                設立初期床位 120 床，服務周邊數十萬民眾，開啟四十年的守護之路。
+              </p>
+            </div>
+          </div>
+        </article>
+
+        <!-- ── 2006｜升格 ─────────────────────────── -->
+        <article class="timeline-item fade-up" data-delay="150">
+          <div class="timeline-axis">
+            <div class="timeline-year-badge">2006</div>
+          </div>
+          <div class="timeline-card">
+            <div class="timeline-card__img-wrap">
+              <picture>
+                <source srcset="images/2006-upgrade.webp" type="image/webp">
+                <img
+                  src="images/2006-upgrade.jpg"
+                  alt="2006 年升格區域醫院典禮"
+                  class="timeline-card__img"
+                  loading="lazy"
+                >
+              </picture>
+            </div>
+            <div class="timeline-card__body">
+              <span class="timeline-card__tag">升格</span>
+              <h3 class="timeline-card__title">升格區域醫院，深化專科醫療</h3>
+              <p class="timeline-card__text">
+                建院二十周年，通過衛生署評鑑正式升格為區域醫院，新增心臟內科、神經外科等專科門診，
+                床位擴增至 350 床，成為縣內重要的急重症轉介中心。
+              </p>
+            </div>
+          </div>
+        </article>
+
+        <!-- ── 2026｜四十周年（特別強調款）────────── -->
+        <article class="timeline-item fade-up" data-delay="300">
+          <div class="timeline-axis">
+            <div class="timeline-year-badge timeline-year-badge--highlight">2026</div>
+          </div>
+          <div class="timeline-card timeline-card--highlight">
+            <div class="timeline-card__img-wrap">
+              <picture>
+                <source srcset="images/2026-40th.webp" type="image/webp">
+                <img
+                  src="images/2026-40th.jpg"
+                  alt="40 周年院慶活動"
+                  class="timeline-card__img"
+                  loading="lazy"
+                >
+              </picture>
+            </div>
+            <div class="timeline-card__body">
+              <span class="timeline-card__tag timeline-card__tag--gold">四十周年</span>
+              <h3 class="timeline-card__title">四十載守護，初心如一</h3>
+              <p class="timeline-card__text">
+                走過四十個年頭，本院持續精進智慧醫療、推展質子治療，並啟動新院區建設計畫，
+                立志在未來四十年繼續以最先進的醫療技術，守護每一位病患與家庭的健康。
+              </p>
+            </div>
+          </div>
+        </article>
+
+      </div><!-- /.timeline -->
+    </div>
+  </section>
+
+
+  <!-- =====================================================
+       歲月留影 Section
+  ====================================================== -->
+  <section id="history" class="section" aria-label="歲月留影">
+    <div class="container">
+      <h2 class="section-title fade-up" data-delay="0">歲月留影</h2>
+      <p class="section-subtitle fade-up" data-delay="80">Building History 1983 – 1998</p>
+      <p class="history-hint fade-up" data-delay="120">← 左右滑動瀏覽建院歷史影像 →</p>
+    </div>
+
+    <div class="history-strip-wrap">
+      <div class="history-strip" id="history-strip" role="list">
+
+        <!-- ── 1983 ── -->
+        <div class="history-year-flag" aria-hidden="true">1983</div>
+        <figure class="history-item" role="listitem" data-full="images/history/1983020036.webp" data-year="1983"><img src="images/history/1983020036.webp" alt="1983 年建院照片" loading="lazy"></figure>
+        <figure class="history-item" role="listitem" data-full="images/history/1983060003.webp" data-year="1983"><img src="images/history/1983060003.webp" alt="1983 年建院照片" loading="lazy"></figure>
+        <figure class="history-item" role="listitem" data-full="images/history/1983090006.webp" data-year="1983"><img src="images/history/1983090006.webp" alt="1983 年建院照片" loading="lazy"></figure>
+
+        <!-- ── 1984 ── -->
+        <div class="history-year-flag" aria-hidden="true">1984</div>
+        <figure class="history-item" role="listitem" data-full="images/history/1984040059.webp" data-year="1984"><img src="images/history/1984040059.webp" alt="1984 年建院照片" loading="lazy"></figure>
+        <figure class="history-item" role="listitem" data-full="images/history/1984040060.webp" data-year="1984"><img src="images/history/1984040060.webp" alt="1984 年建院照片" loading="lazy"></figure>
+        <figure class="history-item" role="listitem" data-full="images/history/1984040061.webp" data-year="1984"><img src="images/history/1984040061.webp" alt="1984 年建院照片" loading="lazy"></figure>
+        <figure class="history-item" role="listitem" data-full="images/history/1984040062.webp" data-year="1984"><img src="images/history/1984040062.webp" alt="1984 年建院照片" loading="lazy"></figure>
+        <figure class="history-item" role="listitem" data-full="images/history/1984040068.webp" data-year="1984"><img src="images/history/1984040068.webp" alt="1984 年建院照片" loading="lazy"></figure>
+        <figure class="history-item" role="listitem" data-full="images/history/1984040069.webp" data-year="1984"><img src="images/history/1984040069.webp" alt="1984 年建院照片" loading="lazy"></figure>
+        <figure class="history-item" role="listitem" data-full="images/history/1984040070.webp" data-year="1984"><img src="images/history/1984040070.webp" alt="1984 年建院照片" loading="lazy"></figure>
+        <figure class="history-item" role="listitem" data-full="images/history/1984040071.webp" data-year="1984"><img src="images/history/1984040071.webp" alt="1984 年建院照片" loading="lazy"></figure>
+        <figure class="history-item" role="listitem" data-full="images/history/1984040072.webp" data-year="1984"><img src="images/history/1984040072.webp" alt="1984 年建院照片" loading="lazy"></figure>
+        <figure class="history-item" role="listitem" data-full="images/history/1984040074.webp" data-year="1984"><img src="images/history/1984040074.webp" alt="1984 年建院照片" loading="lazy"></figure>
+        <figure class="history-item" role="listitem" data-full="images/history/1984040075.webp" data-year="1984"><img src="images/history/1984040075.webp" alt="1984 年建院照片" loading="lazy"></figure>
+        <figure class="history-item" role="listitem" data-full="images/history/1984040076.webp" data-year="1984"><img src="images/history/1984040076.webp" alt="1984 年建院照片" loading="lazy"></figure>
+        <figure class="history-item" role="listitem" data-full="images/history/1984050001.webp" data-year="1984"><img src="images/history/1984050001.webp" alt="1984 年建院照片" loading="lazy"></figure>
+        <figure class="history-item" role="listitem" data-full="images/history/1984050002.webp" data-year="1984"><img src="images/history/1984050002.webp" alt="1984 年建院照片" loading="lazy"></figure>
+
+        <!-- ── 1985 ── -->
+        <div class="history-year-flag" aria-hidden="true">1985</div>
+        <figure class="history-item" role="listitem" data-full="images/history/1985000021.webp" data-year="1985"><img src="images/history/1985000021.webp" alt="1985 年建院照片" loading="lazy"></figure>
+        <figure class="history-item" role="listitem" data-full="images/history/1985000022.webp" data-year="1985"><img src="images/history/1985000022.webp" alt="1985 年建院照片" loading="lazy"></figure>
+        <figure class="history-item" role="listitem" data-full="images/history/1985030002.webp" data-year="1985"><img src="images/history/1985030002.webp" alt="1985 年建院照片" loading="lazy"></figure>
+        <figure class="history-item" role="listitem" data-full="images/history/1985030003.webp" data-year="1985"><img src="images/history/1985030003.webp" alt="1985 年建院照片" loading="lazy"></figure>
+        <figure class="history-item" role="listitem" data-full="images/history/1985030007.webp" data-year="1985"><img src="images/history/1985030007.webp" alt="1985 年建院照片" loading="lazy"></figure>
+        <figure class="history-item" role="listitem" data-full="images/history/1985080010.webp" data-year="1985"><img src="images/history/1985080010.webp" alt="1985 年建院照片" loading="lazy"></figure>
+        <figure class="history-item" role="listitem" data-full="images/history/1985090003.webp" data-year="1985"><img src="images/history/1985090003.webp" alt="1985 年建院照片" loading="lazy"></figure>
+        <figure class="history-item" role="listitem" data-full="images/history/1985110017.webp" data-year="1985"><img src="images/history/1985110017.webp" alt="1985 年建院照片" loading="lazy"></figure>
+        <figure class="history-item" role="listitem" data-full="images/history/1985110020.webp" data-year="1985"><img src="images/history/1985110020.webp" alt="1985 年建院照片" loading="lazy"></figure>
+        <figure class="history-item" role="listitem" data-full="images/history/1985110022.webp" data-year="1985"><img src="images/history/1985110022.webp" alt="1985 年建院照片" loading="lazy"></figure>
+
+        <!-- ── 1988 ── -->
+        <div class="history-year-flag" aria-hidden="true">1988</div>
+        <figure class="history-item" role="listitem" data-full="images/history/1988000032.webp" data-year="1988"><img src="images/history/1988000032.webp" alt="1988 年建院照片" loading="lazy"></figure>
+        <figure class="history-item" role="listitem" data-full="images/history/1988020002.webp" data-year="1988"><img src="images/history/1988020002.webp" alt="1988 年建院照片" loading="lazy"></figure>
+
+        <!-- ── 1989 ── -->
+        <div class="history-year-flag" aria-hidden="true">1989</div>
+        <figure class="history-item" role="listitem" data-full="images/history/1989000050.webp" data-year="1989"><img src="images/history/1989000050.webp" alt="1989 年建院照片" loading="lazy"></figure>
+        <figure class="history-item" role="listitem" data-full="images/history/1989000051.webp" data-year="1989"><img src="images/history/1989000051.webp" alt="1989 年建院照片" loading="lazy"></figure>
+        <figure class="history-item" role="listitem" data-full="images/history/1989080011.webp" data-year="1989"><img src="images/history/1989080011.webp" alt="1989 年建院照片" loading="lazy"></figure>
+        <figure class="history-item" role="listitem" data-full="images/history/1989080012.webp" data-year="1989"><img src="images/history/1989080012.webp" alt="1989 年建院照片" loading="lazy"></figure>
+
+        <!-- ── 1990 ── -->
+        <div class="history-year-flag" aria-hidden="true">1990</div>
+        <figure class="history-item" role="listitem" data-full="images/history/1990050002.webp" data-year="1990"><img src="images/history/1990050002.webp" alt="1990 年建院照片" loading="lazy"></figure>
+
+        <!-- ── 1992 ── -->
+        <div class="history-year-flag" aria-hidden="true">1992</div>
+        <figure class="history-item" role="listitem" data-full="images/history/1992000093.webp" data-year="1992"><img src="images/history/1992000093.webp" alt="1992 年建院照片" loading="lazy"></figure>
+        <figure class="history-item" role="listitem" data-full="images/history/1992070011.webp" data-year="1992"><img src="images/history/1992070011.webp" alt="1992 年建院照片" loading="lazy"></figure>
+
+        <!-- ── 1995 ── -->
+        <div class="history-year-flag" aria-hidden="true">1995</div>
+        <figure class="history-item" role="listitem" data-full="images/history/1995000068.webp" data-year="1995"><img src="images/history/1995000068.webp" alt="1995 年建院照片" loading="lazy"></figure>
+
+        <!-- ── 1998 ── -->
+        <div class="history-year-flag" aria-hidden="true">1998</div>
+        <figure class="history-item" role="listitem" data-full="images/history/1998020223.webp" data-year="1998"><img src="images/history/1998020223.webp" alt="1998 年建院照片" loading="lazy"></figure>
+        <figure class="history-item" role="listitem" data-full="images/history/1998020224.webp" data-year="1998"><img src="images/history/1998020224.webp" alt="1998 年建院照片" loading="lazy"></figure>
+        <figure class="history-item" role="listitem" data-full="images/history/1998020225.webp" data-year="1998"><img src="images/history/1998020225.webp" alt="1998 年建院照片" loading="lazy"></figure>
+        <figure class="history-item" role="listitem" data-full="images/history/1998020226.webp" data-year="1998"><img src="images/history/1998020226.webp" alt="1998 年建院照片" loading="lazy"></figure>
+
+      </div>
+    </div>
+
+    <!-- 燈箱 overlay -->
+    <div class="history-lightbox" id="history-lightbox" role="dialog" aria-modal="true" aria-label="照片放大" hidden>
+      <button class="history-lb__close" id="lb-close" aria-label="關閉">✕</button>
+      <button class="history-lb__prev"  id="lb-prev"  aria-label="上一張">&#8249;</button>
+      <button class="history-lb__next"  id="lb-next"  aria-label="下一張">&#8250;</button>
+      <figure class="history-lb__figure">
+        <img id="lb-img" src="" alt="">
+        <figcaption id="lb-caption"></figcaption>
+      </figure>
+    </div>
+  </section>
+
+
+  <!-- =====================================================
+       Step 5｜Flipbook Section
+       DearFlip 翻頁書（本地版本，不使用 CDN）
+       PDF 來源：docs/40th_anniversary.pdf
+       初始化策略：使用者點擊後才載入，節省院內頻寬
+       手機版：隱藏翻頁器，改顯示下載按鈕
+  ====================================================== -->
+  <section id="flipbook" class="section" aria-label="週年手冊">
+    <div class="container">
+      <h2 class="section-title fade-up" data-delay="0">40 周年手冊</h2>
+      <p class="section-subtitle fade-up" data-delay="80">Anniversary Booklet</p>
+
+      <!-- 導讀音訊播放器 -->
+      <div class="podcast-player fade-up" data-delay="120">
+        <div class="podcast-player__info">
+          <span class="podcast-player__icon" aria-hidden="true">🎙</span>
+          <div>
+            <p class="podcast-player__title">40 周年特刊導讀</p>
+            <p class="podcast-player__desc">翻閱前先聽導讀，了解本刊亮點</p>
+          </div>
+        </div>
+        <audio class="podcast-player__audio" controls preload="none">
+          <source src="audio/guide-40th.mp3" type="audio/mpeg">
+          <source src="audio/guide-40th.m4a" type="audio/mp4">
+          您的瀏覽器不支援音訊播放。
+        </audio>
+      </div>
+
+      <!-- 桌機版翻頁書整體包裝 -->
+      <div class="flipbook-wrap fade-up" data-delay="160">
+
+        <!-- ① 點擊前：封面提示 + 啟動按鈕 -->
+        <div class="flipbook-trigger" id="flipbook-trigger">
+          <div class="flipbook-cover-hint" aria-hidden="true">
+            <!-- 書本 SVG 圖示（純 CSS 裝飾，無語意）-->
+            <svg viewBox="0 0 64 64" fill="none" xmlns="http://www.w3.org/2000/svg">
+              <rect x="8"  y="6" width="22" height="52" rx="2" fill="#c8d6e0"/>
+              <rect x="34" y="6" width="22" height="52" rx="2" fill="#b0c4d4"/>
+              <line x1="30" y1="6" x2="30" y2="58" stroke="#8fa8be" stroke-width="2"/>
+            </svg>
+            <p>點擊下方按鈕，即可翻閱完整年冊</p>
+          </div>
+          <button class="btn btn--gold btn--lg" id="open-flipbook-btn" type="button">
+            開啟互動年冊
+          </button>
+        </div>
+
+        <!-- ② 點擊後：CSS 旋轉載入動畫（DearFlip 初始化完成前顯示）-->
+        <div class="flipbook-loading" id="flipbook-loading" hidden>
+          <div class="flipbook-spinner" role="status" aria-label="年冊載入中"></div>
+          <p>正在載入年冊，請稍候…</p>
+        </div>
+
+        <!-- ③ DearFlip 翻頁書容器（初始隱藏；JS 初始化後顯示）
+             高度由 CSS 設定 600px，手機版自動縮放
+        -->
+        <div id="flipbook-container" class="flipbook-container" hidden></div>
+
+      </div><!-- /.flipbook-wrap -->
+
+      <!-- 桌機版下載按鈕（翻頁書下方，永遠顯示）-->
+      <div class="flipbook-actions">
+        <a href="docs/40th_anniversary.pdf" class="btn btn--outline" download>
+          下載完整 PDF
+        </a>
+      </div>
+
+      <!-- 手機版備用區塊（CSS 控制：<768px 顯示，桌機隱藏）-->
+      <div class="flipbook-mobile-fallback">
+        <p>手機建議直接下載 PDF 閱覽：</p>
+        <a href="docs/40th_anniversary.pdf" class="btn btn--gold" download>
+          下載完整 PDF
+        </a>
+      </div>
+
+    </div>
+  </section>
+
+
+  <!-- =====================================================
+       歷年典藏特刊 Section
+  ====================================================== -->
+  <section id="archive" class="section section--alt" aria-label="歷年典藏特刊">
+    <div class="container">
+      <h2 class="section-title fade-up" data-delay="0">歷年典藏特刊</h2>
+      <p class="section-subtitle fade-up" data-delay="80">Anniversary Archive</p>
+
+      <div class="archive-grid fade-up" data-delay="160">
+
+        <!-- 35 週年 -->
+        <div class="archive-card">
+          <div class="archive-card__cover">
+            <img src="images/cover-35th.jpg" alt="35 周年特刊封面" loading="lazy">
+          </div>
+          <div class="archive-card__body">
+            <span class="archive-card__year">2021 · 35 周年</span>
+            <h3 class="archive-card__title">三十五載‧深耕守護</h3>
+            <a href="docs/35th_anniversary.pdf" class="btn btn--outline" download>
+              下載特刊 PDF
+            </a>
+          </div>
+        </div>
+
+        <!-- 30 週年 -->
+        <div class="archive-card">
+          <div class="archive-card__cover">
+            <img src="images/cover-30th.jpg" alt="30 周年特刊封面" loading="lazy">
+          </div>
+          <div class="archive-card__body">
+            <span class="archive-card__year">2016 · 30 周年</span>
+            <h3 class="archive-card__title">三十年‧初心不變</h3>
+            <a href="docs/30th_anniversary.pdf" class="btn btn--outline" download>
+              下載特刊 PDF
+            </a>
+          </div>
+        </div>
+
+        <!-- 25 週年 -->
+        <div class="archive-card">
+          <div class="archive-card__cover">
+            <img src="images/cover-25th.jpg" alt="25 周年特刊封面" loading="lazy">
+          </div>
+          <div class="archive-card__body">
+            <span class="archive-card__year">2011 · 25 周年</span>
+            <h3 class="archive-card__title">二十五載‧醫心永續</h3>
+            <a href="docs/25th_anniversary.pdf" class="btn btn--outline" download>
+              下載特刊 PDF
+            </a>
+          </div>
+        </div>
+
+        <!-- 20 週年 -->
+        <div class="archive-card">
+          <div class="archive-card__cover">
+            <img src="images/cover-20th.jpg" alt="20 周年特刊封面" loading="lazy">
+          </div>
+          <div class="archive-card__body">
+            <span class="archive-card__year">2006 · 20 周年</span>
+            <h3 class="archive-card__title">二十年‧深情守護</h3>
+            <a href="docs/20th_anniversary.pdf" class="btn btn--outline" download>
+              下載特刊 PDF
+            </a>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+
+  <!-- =====================================================
+       Footer
+  ====================================================== -->
+  <footer id="site-footer">
+    <div class="container">
+      <p>&copy; <span id="footer-year"></span> 花蓮慈濟醫院 版權所有</p>
+    </div>
+  </footer>
+
+
+  <!-- =====================================================
+       Step 5｜第三方 Libs（本地版本，不使用 CDN）
+       載入順序：jQuery → dFlip → 自訂 main.js
+       檔案須手動放入 libs/ 目錄（詳見 libs/README.md）
+  ====================================================== -->
+  <script>window.dFlipLocation = 'libs/';</script>
+  <script src="libs/jquery.min.js"></script>
+  <script src="libs/dflip.min.js"></script>
+  <script src="js/main.js"></script>
+
+</body>
+</html>

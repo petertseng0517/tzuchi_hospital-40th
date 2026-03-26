@@ -1,0 +1,1069 @@
+/* =====================================================
+   醫院 40 周年慶大事記網頁
+   全站樣式表 — css/style.css
+   色彩規範：
+     主色 (信任藍) #005689
+     輔助色 (慶典金) #C5A059
+   斷點：
+     桌機 ≥ 1024px | 平板 768–1023px | 手機 < 768px
+===================================================== */
+
+
+/* =====================================================
+   1. CSS 自訂變數 (Design Tokens)
+===================================================== */
+:root {
+  /* 品牌色 */
+  --color-primary:       #005689;  /* 信任藍 */
+  --color-primary-dark:  #003f66;  /* 深藍（hover / Header scrolled）*/
+  --color-gold:          #C5A059;  /* 慶典金 */
+  --color-gold-dark:     #a8844a;  /* 深金（hover）*/
+
+  /* 中性色 */
+  --color-white:         #ffffff;
+  --color-bg:            #f7f9fb;  /* 頁面淺灰背景 */
+  --color-bg-alt:        #eef2f7;  /* 交錯 section 背景 */
+  --color-text:          #1a2733;  /* 主文字深藍黑 */
+  --color-text-muted:    #5a6e7f;  /* 次要文字 */
+
+  /* 陰影（微陰影，增加層次感）*/
+  --shadow-sm:  0 2px  8px rgba(0, 0, 0, .08);
+  --shadow-md:  0 4px 20px rgba(0, 0, 0, .12);
+  --shadow-lg:  0 8px 40px rgba(0, 0, 0, .16);
+
+  /* 排版 */
+  --font-base:  'Noto Sans TC', 'Microsoft JhengHei', sans-serif;
+  --size-base:  16px;
+  --lh-base:    1.75;
+
+  /* 動畫 */
+  --transition-base: 0.3s ease;
+
+  /* Header 高度（用於 scroll-padding）*/
+  --header-h: 64px;
+}
+
+
+/* =====================================================
+   2. Reset & Base
+===================================================== */
+*, *::before, *::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+html {
+  font-size: var(--size-base);
+  scroll-behavior: smooth;
+  /* 讓固定 Header 不遮住錨點目標 */
+  scroll-padding-top: var(--header-h);
+}
+
+body {
+  font-family: var(--font-base);
+  font-size: 1rem;
+  line-height: var(--lh-base);
+  color: var(--color-text);
+  background-color: var(--color-bg);
+}
+
+img, picture {
+  display: block;
+  max-width: 100%;
+}
+
+a {
+  color: inherit;
+  text-decoration: none;
+}
+
+ul {
+  list-style: none;
+}
+
+
+/* =====================================================
+   3. 工具類別
+===================================================== */
+
+/* 限制最大寬度並水平置中 */
+.container {
+  width: 100%;
+  max-width: 1140px;
+  margin-inline: auto;
+  padding-inline: 1.5rem;
+}
+
+/* Section 共用上下間距 */
+.section {
+  padding-block: 5rem;
+}
+
+.section--alt {
+  background-color: var(--color-bg-alt);
+}
+
+/* Section 標題組 */
+.section-title {
+  font-size: clamp(1.75rem, 3vw, 2.5rem);
+  font-weight: 700;
+  color: var(--color-primary);
+  text-align: center;
+  letter-spacing: .05em;
+}
+
+.section-subtitle {
+  margin-top: .5rem;
+  font-size: 1rem;
+  color: var(--color-gold);
+  text-align: center;
+  letter-spacing: .15em;
+  text-transform: uppercase;
+}
+
+
+/* =====================================================
+   4. 按鈕元件
+===================================================== */
+.btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 44px;       /* 觸控友善：最小 44px */
+  padding: .75rem 2rem;
+  border-radius: 4px;
+  font-size: 1rem;
+  font-weight: 600;
+  letter-spacing: .05em;
+  cursor: pointer;
+  transition: background-color var(--transition-base),
+              color var(--transition-base),
+              box-shadow var(--transition-base);
+  border: 2px solid transparent;
+}
+
+/* 金色實心按鈕（主要 CTA）*/
+.btn--gold {
+  background-color: var(--color-gold);
+  color: var(--color-white);
+  border-color: var(--color-gold);
+}
+.btn--gold:hover,
+.btn--gold:focus-visible {
+  background-color: var(--color-gold-dark);
+  border-color: var(--color-gold-dark);
+  box-shadow: var(--shadow-md);
+}
+
+/* 藍色外框按鈕（次要）*/
+.btn--outline {
+  background-color: transparent;
+  color: var(--color-primary);
+  border-color: var(--color-primary);
+}
+.btn--outline:hover,
+.btn--outline:focus-visible {
+  background-color: var(--color-primary);
+  color: var(--color-white);
+}
+
+/* 大尺寸修飾 */
+.btn--lg {
+  padding: 1rem 2.5rem;
+  font-size: 1.125rem;
+}
+
+
+/* =====================================================
+   5. Step 2｜Header
+===================================================== */
+#site-header {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  z-index: 100;
+  height: var(--header-h);
+  /* 預設透明；捲動後 JS 加上 .scrolled，背景變深藍 */
+  background-color: transparent;
+  transition: background-color var(--transition-base),
+              box-shadow var(--transition-base);
+}
+
+#site-header.scrolled {
+  background-color: var(--color-primary-dark);
+  box-shadow: var(--shadow-md);
+}
+
+.header-inner {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  height: 100%;
+}
+
+/* Logo */
+.site-logo {
+  display: flex;
+  flex-direction: column;
+  line-height: 1.2;
+  color: var(--color-white);
+}
+
+.logo-name {
+  font-size: 1.25rem;
+  font-weight: 700;
+  letter-spacing: .05em;
+}
+
+.logo-badge {
+  font-size: .75rem;
+  color: var(--color-gold);
+  letter-spacing: .1em;
+}
+
+/* 主導覽 */
+.main-nav ul {
+  display: flex;
+  gap: 2rem;
+}
+
+.main-nav a {
+  color: var(--color-white);
+  font-weight: 500;
+  font-size: .95rem;
+  letter-spacing: .05em;
+  padding-block: .25rem;
+  position: relative;
+}
+
+/* 底線懸停效果 */
+.main-nav a::after {
+  content: '';
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 0;
+  height: 2px;
+  background-color: var(--color-gold);
+  transition: width var(--transition-base);
+}
+.main-nav a:hover::after,
+.main-nav a:focus-visible::after {
+  width: 100%;
+}
+
+/* 漢堡按鈕（手機用；桌機隱藏）*/
+.nav-toggle {
+  display: none;
+  flex-direction: column;
+  gap: 5px;
+  background: none;
+  border: none;
+  cursor: pointer;
+  padding: .5rem;
+  min-height: 44px;
+  min-width: 44px;
+  align-items: center;
+  justify-content: center;
+}
+
+.nav-toggle span {
+  display: block;
+  width: 24px;
+  height: 2px;
+  background-color: var(--color-white);
+  border-radius: 2px;
+  transition: transform var(--transition-base), opacity var(--transition-base);
+}
+
+
+/* =====================================================
+   6. Step 2｜Hero Section
+===================================================== */
+#hero {
+  position: relative;
+  min-height: 100svh;       /* 視口高度，使用 svh 支援行動瀏覽器工具列 */
+  display: flex;
+  align-items: center;
+  overflow: hidden;
+}
+
+/* 全幅背景圖 */
+.hero-bg-picture {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+}
+
+.hero-bg-img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center;
+  /* 尚未置入實際圖片時，以漸層色塊替代 */
+  background: linear-gradient(135deg, var(--color-primary-dark) 0%, var(--color-primary) 60%, #007ab8 100%);
+}
+
+/* 深色遮罩，確保文字在任何背景圖上均清晰 */
+.hero-overlay {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(
+    to bottom,
+    rgba(0, 31, 55, .55) 0%,
+    rgba(0, 31, 55, .70) 60%,
+    rgba(0, 31, 55, .85) 100%
+  );
+}
+
+/* Hero 文字內容 */
+.hero-content {
+  position: relative;   /* 疊在遮罩之上 */
+  z-index: 1;
+  color: var(--color-white);
+  text-align: center;
+  padding-top: var(--header-h); /* 避免被固定 Header 遮住 */
+}
+
+.hero-eyebrow {
+  font-size: .9rem;
+  letter-spacing: .25em;
+  color: var(--color-gold);
+  text-transform: uppercase;
+  margin-bottom: 1rem;
+}
+
+.hero-title {
+  font-size: clamp(2.25rem, 6vw, 4.5rem);
+  font-weight: 900;
+  line-height: 1.2;
+  letter-spacing: .08em;
+  text-shadow: 0 2px 12px rgba(0, 0, 0, .4);
+  margin-bottom: 1.5rem;
+}
+
+.hero-desc {
+  font-size: clamp(1rem, 2vw, 1.25rem);
+  color: rgba(255, 255, 255, .85);
+  max-width: 520px;
+  margin-inline: auto;
+  margin-bottom: 2.5rem;
+}
+
+/* 向下捲動箭頭 */
+.scroll-hint {
+  position: absolute;
+  bottom: 2rem;
+  left: 50%;
+  transform: translateX(-50%);
+  z-index: 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 44px;
+  height: 44px;
+}
+
+.scroll-hint__arrow {
+  display: block;
+  width: 20px;
+  height: 20px;
+  border-right: 2px solid var(--color-gold);
+  border-bottom: 2px solid var(--color-gold);
+  transform: rotate(45deg);
+  animation: bounce-down 1.6s ease-in-out infinite;
+}
+
+@keyframes bounce-down {
+  0%, 100% { transform: rotate(45deg) translateY(0);    opacity: 1; }
+  50%       { transform: rotate(45deg) translateY(6px);  opacity: .6; }
+}
+
+
+/* =====================================================
+   7. Step 3｜Timeline Section
+===================================================== */
+#timeline .section-title {
+  margin-bottom: .5rem;
+}
+
+/* ── 軌道容器：相對定位，以便繪製中軸線 ── */
+.timeline {
+  position: relative;
+  margin-top: 4rem;
+  padding-block: 1rem;
+}
+
+/* 中軸線（信任藍漸層，兩端淡出）*/
+.timeline::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 3px;
+  background: linear-gradient(
+    to bottom,
+    transparent 0%,
+    var(--color-primary) 6%,
+    var(--color-primary) 94%,
+    transparent 100%
+  );
+}
+
+/* ── 每個年份項目：3 欄 grid（左卡 ｜ 軸心 ｜ 右卡）── */
+.timeline-item {
+  display: grid;
+  grid-template-columns: 1fr 100px 1fr;
+  align-items: start;
+  margin-bottom: 4rem;
+  gap: 0 1.5rem;
+}
+
+.timeline-item:last-child {
+  margin-bottom: 0;
+}
+
+/* 奇數項：卡片在右欄 */
+.timeline-item:nth-child(odd) .timeline-axis { grid-column: 2; grid-row: 1; }
+.timeline-item:nth-child(odd) .timeline-card { grid-column: 3; grid-row: 1; }
+
+/* 偶數項：卡片在左欄，軸心仍在中間 */
+.timeline-item:nth-child(even) .timeline-card { grid-column: 1; grid-row: 1; }
+.timeline-item:nth-child(even) .timeline-axis { grid-column: 2; grid-row: 1; }
+
+/* ── 軸心：年份徽章容器 ── */
+.timeline-axis {
+  display: flex;
+  justify-content: center;
+  padding-top: 1.5rem;   /* 對齊卡片標題高度 */
+  position: relative;
+  z-index: 1;            /* 疊在中軸線之上 */
+}
+
+/* 年份圓形徽章（信任藍）*/
+.timeline-year-badge {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 68px;
+  height: 68px;
+  border-radius: 50%;
+  background-color: var(--color-primary);
+  color: var(--color-white);
+  font-size: .9rem;
+  font-weight: 700;
+  letter-spacing: .03em;
+  /* 雙層光暈：白環 + 藍環，製造浮雕感 */
+  box-shadow:
+    0 0 0 5px var(--color-bg),
+    0 0 0 8px var(--color-primary),
+    var(--shadow-sm);
+}
+
+/* 40 周年高亮版本（慶典金）*/
+.timeline-year-badge--highlight {
+  background-color: var(--color-gold);
+  box-shadow:
+    0 0 0 5px var(--color-bg),
+    0 0 0 8px var(--color-gold),
+    var(--shadow-sm);
+}
+
+/* ── 卡片 ── */
+.timeline-card {
+  background-color: var(--color-white);
+  border-radius: 10px;
+  overflow: hidden;
+  box-shadow: var(--shadow-sm);
+  transition: transform var(--transition-base), box-shadow var(--transition-base);
+}
+
+.timeline-card:hover {
+  transform: translateY(-5px);
+  box-shadow: var(--shadow-lg);
+}
+
+/* 40 周年卡片：頂部金色邊條強調 */
+.timeline-card--highlight {
+  border-top: 4px solid var(--color-gold);
+}
+
+/* 卡片圖片區（16:9 比例，無圖時顯示淺灰底）*/
+.timeline-card__img-wrap {
+  overflow: hidden;
+  aspect-ratio: 16 / 9;
+  background-color: var(--color-bg-alt);
+}
+
+.timeline-card__img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: transform .5s ease;
+}
+
+.timeline-card:hover .timeline-card__img {
+  transform: scale(1.05);
+}
+
+/* 卡片文字區 */
+.timeline-card__body {
+  padding: 1.5rem;
+}
+
+/* 標籤（信任藍）*/
+.timeline-card__tag {
+  display: inline-block;
+  padding: .2rem .75rem;
+  border-radius: 2px;
+  background-color: var(--color-primary);
+  color: var(--color-white);
+  font-size: .75rem;
+  font-weight: 600;
+  letter-spacing: .1em;
+  margin-bottom: .75rem;
+}
+
+/* 標籤（慶典金：40 周年用）*/
+.timeline-card__tag--gold {
+  background-color: var(--color-gold);
+}
+
+/* 卡片標題 */
+.timeline-card__title {
+  font-size: 1.15rem;
+  font-weight: 700;
+  color: var(--color-text);
+  line-height: 1.45;
+  margin-bottom: .75rem;
+}
+
+/* 卡片內文 */
+.timeline-card__text {
+  font-size: .95rem;
+  color: var(--color-text-muted);
+  line-height: 1.85;
+}
+
+
+/* =====================================================
+   8. Step 5｜Flipbook Section
+===================================================== */
+
+/* Section 背景：規格書指定的優雅淺灰 */
+#flipbook {
+  background-color: #F8F9FA;
+}
+
+/* 翻頁書整體包裝：統一圓角與陰影 */
+.flipbook-wrap {
+  margin-top: 2.5rem;
+  border-radius: 12px;
+  overflow: hidden;
+  box-shadow: var(--shadow-lg);
+  background-color: #F8F9FA;
+}
+
+/* ── 觸發區（點擊前）── */
+.flipbook-trigger {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 2rem;
+  min-height: 300px;
+  padding: 3rem 2rem;
+  background: linear-gradient(145deg, #eef2f7 0%, #e4ecf4 100%);
+  border: 2px dashed #c0d0df;
+  border-radius: 12px;
+  text-align: center;
+}
+
+.flipbook-cover-hint {
+  color: var(--color-text-muted);
+}
+
+.flipbook-cover-hint svg {
+  width: 72px;
+  height: 72px;
+  margin-inline: auto;
+  margin-bottom: .75rem;
+  opacity: .45;
+}
+
+.flipbook-cover-hint p {
+  font-size: .95rem;
+  letter-spacing: .03em;
+}
+
+/* ── 載入動畫（點擊後、DearFlip 就緒前）── */
+.flipbook-loading {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 1.25rem;
+  min-height: 300px;
+  color: var(--color-text-muted);
+  font-size: .95rem;
+}
+
+/* CSS 旋轉環形動畫 */
+.flipbook-spinner {
+  width: 52px;
+  height: 52px;
+  border: 5px solid #dde5ee;
+  border-top-color: var(--color-primary);
+  border-radius: 50%;
+  animation: flipbook-spin .85s linear infinite;
+}
+
+@keyframes flipbook-spin {
+  to { transform: rotate(360deg); }
+}
+
+/* ── DearFlip 翻頁書容器 ── */
+/* 桌機固定 600px；手機版由 RWD 區塊控制 */
+.flipbook-container {
+  width: 100%;
+  height: 600px;
+}
+
+/* ── 下載按鈕（桌機版，翻頁書下方）── */
+.flipbook-actions {
+  margin-top: 1.5rem;
+  text-align: center;
+}
+
+/* ── 手機版備用下載區塊（桌機隱藏）── */
+.flipbook-mobile-fallback {
+  display: none;
+  text-align: center;
+  margin-top: 2rem;
+}
+
+.flipbook-mobile-fallback p {
+  margin-bottom: 1rem;
+  color: var(--color-text-muted);
+  font-size: .95rem;
+}
+
+
+/* =====================================================
+   9. 導讀播放器
+===================================================== */
+.podcast-player {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+  margin: 2rem auto 0;
+  max-width: 640px;
+  background: var(--color-white);
+  border: 1px solid #dde5ee;
+  border-radius: 12px;
+  padding: 1.25rem 1.5rem;
+  box-shadow: var(--shadow-sm);
+}
+
+.podcast-player__info {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+}
+
+.podcast-player__icon {
+  font-size: 2rem;
+  line-height: 1;
+}
+
+.podcast-player__title {
+  font-size: 1rem;
+  font-weight: 700;
+  color: var(--color-primary);
+}
+
+.podcast-player__desc {
+  font-size: .85rem;
+  color: var(--color-text-muted);
+  margin-top: .2rem;
+}
+
+.podcast-player__audio {
+  width: 100%;
+  accent-color: var(--color-primary);
+}
+
+
+/* =====================================================
+   11. 歲月留影 Section
+===================================================== */
+#history .section-title { margin-bottom: .5rem; }
+
+.history-hint {
+  text-align: center;
+  font-size: .875rem;
+  color: var(--color-text-muted);
+  margin-top: .75rem;
+  letter-spacing: .05em;
+}
+
+.history-strip-wrap {
+  margin-top: 2.5rem;
+  overflow-x: auto;
+  -webkit-overflow-scrolling: touch;
+  scrollbar-width: thin;
+  scrollbar-color: var(--color-primary) transparent;
+}
+
+.history-strip-wrap::-webkit-scrollbar { height: 6px; }
+.history-strip-wrap::-webkit-scrollbar-thumb {
+  background: var(--color-primary);
+  border-radius: 3px;
+}
+
+.history-strip {
+  display: flex;
+  align-items: flex-end;
+  gap: 1rem;
+  padding: 1rem 2rem 1.5rem;
+  scroll-snap-type: x mandatory;
+  width: max-content;
+}
+
+.history-year-flag {
+  flex-shrink: 0;
+  align-self: flex-end;
+  padding: .4rem .9rem;
+  background: var(--color-primary);
+  color: var(--color-white);
+  font-size: .85rem;
+  font-weight: 700;
+  letter-spacing: .1em;
+  border-radius: 4px;
+  margin-bottom: .25rem;
+}
+
+.history-item {
+  flex-shrink: 0;
+  width: 240px;
+  scroll-snap-align: start;
+  cursor: zoom-in;
+  border-radius: 8px;
+  overflow: hidden;
+  box-shadow: var(--shadow-sm);
+  transition: transform .25s ease, box-shadow .25s ease;
+  margin: 0;
+}
+
+.history-item:hover {
+  transform: translateY(-4px);
+  box-shadow: var(--shadow-md);
+}
+
+.history-item img {
+  display: block;
+  width: 100%;
+  height: 180px;
+  object-fit: cover;
+}
+
+/* ── 燈箱 ── */
+.history-lightbox {
+  position: fixed;
+  inset: 0;
+  z-index: 200;
+  background: rgba(0, 0, 0, .92);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.history-lightbox[hidden] { display: none; }
+
+.history-lb__figure {
+  max-width: 90vw;
+  max-height: 90vh;
+  margin: 0;
+  text-align: center;
+}
+
+.history-lb__figure img {
+  max-width: 100%;
+  max-height: 85vh;
+  object-fit: contain;
+  border-radius: 4px;
+}
+
+.history-lb__figure figcaption {
+  margin-top: .75rem;
+  color: rgba(255, 255, 255, .6);
+  font-size: .875rem;
+  letter-spacing: .05em;
+}
+
+.history-lb__close,
+.history-lb__prev,
+.history-lb__next {
+  position: absolute;
+  background: none;
+  border: none;
+  color: var(--color-white);
+  font-size: 2.5rem;
+  cursor: pointer;
+  padding: .5rem 1rem;
+  opacity: .75;
+  transition: opacity .2s;
+  line-height: 1;
+}
+
+.history-lb__close:hover,
+.history-lb__prev:hover,
+.history-lb__next:hover { opacity: 1; }
+
+.history-lb__close { top: 1rem;  right: 1.5rem; font-size: 1.5rem; }
+.history-lb__prev  { left: 1rem; top: 50%; transform: translateY(-50%); }
+.history-lb__next  { right: 1rem; top: 50%; transform: translateY(-50%); }
+
+@media (max-width: 767px) {
+  .history-item       { width: 180px; }
+  .history-item img   { height: 140px; }
+}
+
+
+/* =====================================================
+   10. 歷年典藏特刊 Section
+===================================================== */
+.archive-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 2rem;
+  margin-top: 3rem;
+}
+
+.archive-card {
+  background: var(--color-white);
+  border-radius: 12px;
+  box-shadow: var(--shadow-sm);
+  overflow: hidden;
+  transition: box-shadow var(--transition-base), transform var(--transition-base);
+}
+
+.archive-card:hover {
+  box-shadow: var(--shadow-md);
+  transform: translateY(-4px);
+}
+
+.archive-card__cover {
+  aspect-ratio: 3 / 4;
+  overflow: hidden;
+}
+
+.archive-card__cover img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: transform .4s ease;
+}
+
+.archive-card:hover .archive-card__cover img {
+  transform: scale(1.04);
+}
+
+.archive-card__body {
+  padding: 1.5rem;
+  display: flex;
+  flex-direction: column;
+  gap: .75rem;
+}
+
+.archive-card__year {
+  font-size: .85rem;
+  color: var(--color-gold);
+  font-weight: 600;
+  letter-spacing: .1em;
+}
+
+.archive-card__title {
+  font-size: 1.25rem;
+  font-weight: 700;
+  color: var(--color-primary);
+  line-height: 1.4;
+}
+
+
+/* =====================================================
+   10. Footer
+===================================================== */
+#site-footer {
+  background-color: var(--color-primary-dark);
+  color: rgba(255, 255, 255, .7);
+  text-align: center;
+  padding-block: 1.5rem;
+  font-size: .875rem;
+  letter-spacing: .05em;
+}
+
+
+/* =====================================================
+   10. 捲動觸發動畫（IntersectionObserver 驅動）
+       JS 將為可見元素加上 .is-visible class
+===================================================== */
+.fade-up {
+  opacity: 0;
+  transform: translateY(32px);
+  transition: opacity .6s ease, transform .6s ease;
+}
+
+.fade-up.is-visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+
+/* =====================================================
+   11. RWD 斷點 — 平板 (768px – 1023px)
+===================================================== */
+@media (max-width: 1023px) {
+  .section {
+    padding-block: 4rem;
+  }
+
+  /* Timeline：縮小軸心欄寬 */
+  .timeline-item {
+    grid-template-columns: 1fr 80px 1fr;
+    gap: 0 1rem;
+    margin-bottom: 3rem;
+  }
+
+  .timeline-year-badge {
+    width: 58px;
+    height: 58px;
+    font-size: .8rem;
+  }
+}
+
+
+/* =====================================================
+   12. RWD 斷點 — 手機 (< 768px)
+===================================================== */
+@media (max-width: 767px) {
+
+  /* Header：顯示漢堡鈕，隱藏橫向導覽 */
+  .nav-toggle {
+    display: flex;
+  }
+
+  .main-nav {
+    display: none;           /* 收合；JS 加 .nav-open 展開 */
+    position: fixed;
+    top: var(--header-h);
+    left: 0;
+    right: 0;
+    background-color: var(--color-primary-dark);
+    padding: 1.5rem;
+    box-shadow: var(--shadow-lg);
+  }
+
+  .main-nav.nav-open {
+    display: block;
+  }
+
+  .main-nav ul {
+    flex-direction: column;
+    gap: 0;
+  }
+
+  .main-nav a {
+    display: block;
+    padding-block: .875rem;
+    border-bottom: 1px solid rgba(255, 255, 255, .1);
+    font-size: 1rem;
+  }
+
+  /* ── Timeline：單欄靠左排列 ── */
+  /* 軸線移到最左側 */
+  .timeline::before {
+    left: 24px;
+    transform: none;
+  }
+
+  /* 所有項目改為 2 欄（軸心 | 卡片），消除左右交錯 */
+  .timeline-item {
+    grid-template-columns: 48px 1fr;
+    margin-bottom: 2rem;
+    gap: 0 1rem;
+  }
+
+  /* 不分奇偶，軸心固定第 1 欄，卡片固定第 2 欄 */
+  .timeline-item:nth-child(odd)  .timeline-axis,
+  .timeline-item:nth-child(even) .timeline-axis {
+    grid-column: 1;
+    grid-row: 1;
+  }
+
+  .timeline-item:nth-child(odd)  .timeline-card,
+  .timeline-item:nth-child(even) .timeline-card {
+    grid-column: 2;
+    grid-row: 1;
+  }
+
+  .timeline-axis {
+    padding-top: 1rem;
+  }
+
+  .timeline-year-badge {
+    width: 46px;
+    height: 46px;
+    font-size: .7rem;
+    box-shadow:
+      0 0 0 3px var(--color-bg),
+      0 0 0 5px var(--color-primary);
+  }
+
+  .timeline-year-badge--highlight {
+    box-shadow:
+      0 0 0 3px var(--color-bg),
+      0 0 0 5px var(--color-gold);
+  }
+
+  /* Hero：行動裝置文字左對齊，提升閱讀舒適度 */
+  .hero-content {
+    text-align: left;
+  }
+
+  .hero-desc {
+    margin-inline: 0;
+  }
+
+  .section {
+    padding-block: 3rem;
+  }
+
+  /* Flipbook：手機版隱藏翻頁器，改顯示下載按鈕 */
+  .flipbook-wrap,
+  .flipbook-actions {
+    display: none;
+  }
+
+  .flipbook-mobile-fallback {
+    display: block;
+  }
+
+  /* 若日後開放手機版翻頁書，容器改為自動高度 */
+  .flipbook-container {
+    height: auto;
+    min-height: 420px;
+  }
+
+  /* 典藏特刊：單欄置中 */
+  .archive-grid {
+    grid-template-columns: 1fr;
+    max-width: 360px;
+    margin-inline: auto;
+  }
+}
