@@ -7,6 +7,7 @@
 | cwebp | 1.6.0 | 圖片批次轉換為 WebP 格式 | `brew install webp` |
 | Python | 3.13.7 | 本地開發環境 | `brew install python` |
 | afconvert | macOS 內建 | 音訊格式轉換（M4A → MP3） | 無需安裝 |
+| ffmpeg | — | 音訊重新編碼（壓縮語音檔） | `brew install ffmpeg` |
 
 ## 前端套件（本地化，存放於 `libs/`）
 
@@ -34,6 +35,13 @@ for f in images/history/*.jpg images/history/*.tif images/history/*.TIF; do
   [ -f "$f" ] || continue
   cwebp -q 82 "$f" -o "${f%.*}.webp"
 done
+```
+
+## 音訊處理指令
+
+```bash
+# M4A 轉 MP3（語音最佳化，96kbps 單聲道，約縮小至 3–5MB）
+ffmpeg -i audio/guide-40th.m4a -codec:a libmp3lame -b:a 96k -ac 1 audio/guide-40th.mp3
 ```
 
 ## 本地預覽
