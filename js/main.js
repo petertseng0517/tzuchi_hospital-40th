@@ -112,6 +112,38 @@
 
 
 /* =====================================================
+   Timeline Accordion｜折疊式時間軸開關
+   ─ 點擊年代標題展開／收合對應里程碑列表
+   ─ 可同時開啟多個年代（非互斥）
+===================================================== */
+(function initTimelineAccordion() {
+  var eras = document.querySelectorAll('.tl-era');
+  if (!eras.length) return;
+
+  eras.forEach(function (era) {
+    var btn = era.querySelector('.tl-era__header');
+    if (!btn) return;
+
+    btn.addEventListener('click', function () {
+      var isOpen = era.classList.contains('is-open');
+
+      // 關閉所有已開啟的 era
+      eras.forEach(function (other) {
+        other.classList.remove('is-open');
+        other.querySelector('.tl-era__header').setAttribute('aria-expanded', 'false');
+      });
+
+      // 若原本是關閉的，才展開（點已開啟的項目則收合）
+      if (!isOpen) {
+        era.classList.add('is-open');
+        btn.setAttribute('aria-expanded', 'true');
+      }
+    });
+  });
+})();
+
+
+/* =====================================================
    Step 5｜DearFlip 延遲初始化
    ─ 使用者點擊「開啟互動年冊」後才傳輸 PDF，節省院內頻寬
    ─ 依序顯示：觸發按鈕 → 旋轉動畫 → 翻頁書

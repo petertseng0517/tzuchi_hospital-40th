@@ -552,7 +552,252 @@ ul {
 
 
 /* =====================================================
-   8. Step 5｜Flipbook Section
+   8. Timeline Accordion（折疊式時間軸）
+===================================================== */
+
+.timeline-accordion {
+  margin-top: 3rem;
+  border: 1px solid #dde6ef;
+  border-radius: 10px;
+  overflow: hidden;
+}
+
+/* 每個年代區塊 */
+.tl-era {
+  border-bottom: 1px solid #dde6ef;
+}
+.tl-era:last-child {
+  border-bottom: none;
+}
+
+/* 年代標題按鈕 */
+.tl-era__header {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  padding: 1.25rem 1.5rem;
+  background: var(--color-white);
+  border: none;
+  cursor: pointer;
+  text-align: left;
+  transition: background var(--transition-base);
+  min-height: 44px;
+}
+
+.tl-era__header:hover,
+.tl-era.is-open .tl-era__header {
+  background: var(--color-bg-alt);
+}
+
+.tl-era__label {
+  font-weight: 700;
+  font-size: 1.05rem;
+  color: var(--color-primary);
+  flex: 1;
+}
+
+.tl-era__range {
+  font-size: .875rem;
+  color: var(--color-text-muted);
+}
+
+.tl-era__count {
+  font-size: .78rem;
+  background: var(--color-bg);
+  border: 1px solid #dde6ef;
+  padding: .2rem .65rem;
+  border-radius: 20px;
+  color: var(--color-text-muted);
+  white-space: nowrap;
+}
+
+/* 展開箭頭 */
+.tl-era__arrow {
+  flex-shrink: 0;
+  width: 9px;
+  height: 9px;
+  border-right: 2px solid var(--color-primary);
+  border-bottom: 2px solid var(--color-primary);
+  transform: rotate(45deg);
+  transition: transform var(--transition-base);
+  margin-left: .25rem;
+}
+
+.tl-era.is-open .tl-era__arrow {
+  transform: rotate(-135deg);
+}
+
+/* 折疊主體：預設收合 */
+.tl-era__body {
+  max-height: 0;
+  overflow: hidden;
+  transition: max-height .4s ease;
+}
+
+.tl-era.is-open .tl-era__body {
+  max-height: 2000px;
+}
+
+/* 里程碑列表 */
+.tl-era__list {
+  padding: .5rem 1.5rem 1.25rem 2.75rem; /* 左側多留空間給線條與圓點 */
+  border-top: 1px solid #dde6ef;
+  position: relative;
+}
+
+/* 左側垂直連接線：展開時從上往下繪製 */
+.tl-era__list::before {
+  content: '';
+  position: absolute;
+  left: 1.75rem;
+  top: .75rem;
+  bottom: .75rem;
+  width: 2px;
+  background: linear-gradient(
+    to bottom,
+    var(--color-primary) 0%,
+    rgba(0, 86, 137, .2) 100%
+  );
+  transform: scaleY(0);
+  transform-origin: top;
+  transition: transform .45s ease;
+}
+
+.tl-era.is-open .tl-era__list::before {
+  transform: scaleY(1);
+}
+
+/* 單一里程碑列項 */
+.tl-milestone {
+  display: flex;
+  align-items: flex-start;
+  gap: 1.25rem;
+  padding: 1rem 0;
+  border-bottom: 1px solid #eef2f7;
+}
+
+.tl-milestone:last-child {
+  border-bottom: none;
+}
+
+/* 年份欄 */
+.tl-milestone__year {
+  flex-shrink: 0;
+  min-width: 44px;
+  font-size: .85rem;
+  font-weight: 700;
+  color: var(--color-primary);
+  padding-top: .15rem;
+  letter-spacing: .03em;
+  position: relative;
+}
+
+/* 年份圓點，對齊左側連接線 */
+.tl-milestone__year::before {
+  content: '';
+  position: absolute;
+  left: -1.25rem;
+  top: .55rem;
+  width: 9px;
+  height: 9px;
+  border-radius: 50%;
+  background-color: var(--color-primary);
+  border: 2px solid var(--color-white);
+  box-shadow: 0 0 0 2px var(--color-primary);
+  z-index: 1;
+}
+
+.tl-milestone__year--gold {
+  color: var(--color-gold);
+}
+
+.tl-milestone--highlight .tl-milestone__year::before {
+  background-color: var(--color-gold);
+  box-shadow: 0 0 0 2px var(--color-gold);
+}
+
+/* 文字區 */
+.tl-milestone__content {
+  flex: 1;
+}
+
+.tl-milestone__title {
+  font-size: 1rem;
+  font-weight: 700;
+  color: var(--color-text);
+  margin-bottom: .35rem;
+  line-height: 1.45;
+}
+
+.tl-milestone__text {
+  font-size: .9rem;
+  color: var(--color-text-muted);
+  line-height: 1.7;
+}
+
+/* 縮圖（可選，有圖片才顯示）*/
+.tl-milestone__img-wrap {
+  flex-shrink: 0;
+}
+
+.tl-milestone__img {
+  width: 120px;
+  height: 80px;
+  object-fit: cover;
+  border-radius: 6px;
+  display: block;
+}
+
+/* 40周年高亮列項 */
+.tl-milestone--highlight .tl-milestone__title {
+  color: var(--color-gold);
+}
+
+/* ── RWD：手機版 ── */
+@media (max-width: 767px) {
+  .tl-era__header {
+    flex-wrap: wrap;
+    gap: .5rem;
+    padding: 1rem;
+  }
+
+  .tl-era__range {
+    order: 3;
+    font-size: .8rem;
+  }
+
+  .tl-era__count {
+    order: 4;
+  }
+
+  .tl-era__arrow {
+    order: 2;
+  }
+
+  .tl-era__list {
+    padding: .5rem 1rem 1rem;
+  }
+
+  .tl-milestone {
+    flex-wrap: wrap;
+    gap: .75rem;
+  }
+
+  .tl-milestone__img-wrap {
+    order: -1;
+    width: 100%;
+  }
+
+  .tl-milestone__img {
+    width: 100%;
+    height: 160px;
+  }
+}
+
+
+/* =====================================================
+   9. Step 5｜Flipbook Section
 ===================================================== */
 
 /* Section 背景：規格書指定的優雅淺灰 */
