@@ -9,8 +9,12 @@
 | Section | ID | 說明 |
 |---|---|---|
 | 主視覺 | `#hero` | 全幅院景背景圖 + 大標語 |
+| 數字看 40 年 | `#stats` | 實績亮點統計卡片（獎項、排名、累計數據） |
+| 上人開示 | `#wisdom` | 開示金句摘錄，大事記前的精神引言 |
 | 四十年大事記 | `#timeline` | 垂直交錯時間軸（1986 / 2006 / 2026） |
 | 歲月留影 | `#history` | 水平捲軸老照片帶（1983–1998，共 41 張） |
+| 黃金人口 | `#staff` | 資深員工人物誌卡片，摘自 40 周年特刊 |
+| 生命奇蹟 | `#stories` | 精選真實搶救故事卡片，摘自 40 周年特刊 |
 | 40 周年手冊 | `#flipbook` | 導讀音訊播放器 + DearFlip 互動翻頁書 |
 | 歷年典藏特刊 | `#archive` | 20、25、30、35 周年特刊封面卡片與 PDF 下載 |
 
@@ -39,7 +43,8 @@ ai_hospital-40th/
 │   ├── cover-25th.jpg
 │   ├── cover-30th.jpg
 │   ├── cover-35th.jpg
-│   └── history/                # 老照片（41 張 .webp，命名格式 YYYYMMNNNN）
+│   ├── history/                 # 老照片（41 張 .webp，命名格式 YYYYMMNNNN）
+│   └── stories/                 # 生命奇蹟配圖，擷取自 40 周年特刊內頁（記者會／公開活動照）
 ├── docs/
 │   ├── 40th_anniversary.pdf    # 40 周年手冊（翻頁書來源）
 │   ├── 35th_anniversary.pdf

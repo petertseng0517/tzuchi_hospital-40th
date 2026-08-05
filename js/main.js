@@ -256,3 +256,83 @@
     if (e.key === 'ArrowRight') show(current + 1);
   });
 })();
+
+
+/* =====================================================
+   歲月留影｜自動向左緩慢捲動
+   ─ 進入視窗後才開始播放（IntersectionObserver），離開視窗即暫停
+   ─ 使用者以滑鼠 hover／觸控／滾輪手動瀏覽時暫停，停止互動一段時間後才恢復
+   ─ 捲到底自動回到開頭，循環播放
+   ─ 支援 prefers-reduced-motion：偏好減少動畫者不啟動自動捲動
+===================================================== */
+(function initHistoryAutoScroll() {
+  var wrap = document.querySelector('.history-strip-wrap');
+  if (!wrap) return;
+
+  if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
+
+  var SPEED        = 28;   /* 每秒捲動像素數，數字越小越慢 */
+  var RESUME_DELAY = 2500; /* 使用者停止互動後，幾毫秒才恢復自動捲動 */
+
+  var rafId       = null;
+  var lastTime    = null;
+  var paused      = false;
+  var resumeTimer = null;
+  var inView      = false;
+  /* 用獨立浮點數累積捲動位置，不要每幀讀回 wrap.scrollLeft ——
+     瀏覽器會把 scrollLeft 四捨五入成整數像素，這個速度下每幀增量不到 0.5px，
+     若直接讀回會被整數化吃掉，永遠捲不動。 */
+  var scrollPos   = wrap.scrollLeft;
+
+  function step(time) {
+    if (lastTime === null) lastTime = time;
+    var delta = (time - lastTime) / 1000;
+    lastTime = time;
+
+    if (!paused) {
+      var maxScroll = wrap.scrollWidth - wrap.clientWidth;
+      if (maxScroll > 0) {
+        scrollPos += SPEED * delta;
+        if (scrollPos >= maxScroll) scrollPos = 0; /* 捲到底回到開頭 */
+        wrap.scrollLeft = scrollPos;
+      }
+    }
+
+    rafId = inView ? requestAnimationFrame(step) : null;
+  }
+
+  /* 滑鼠移入：暫停直到移出（不希望使用者細看照片時被自動捲動打斷）*/
+  function pauseIndefinitely() {
+    paused = true;
+    if (resumeTimer) { clearTimeout(resumeTimer); resumeTimer = null; }
+  }
+
+  /* 觸控／滾輪／滑鼠移出：暫停，並在停止互動一段時間後自動恢復 */
+  function pauseThenResume() {
+    paused = true;
+    if (resumeTimer) clearTimeout(resumeTimer);
+    resumeTimer = setTimeout(function () {
+      scrollPos = wrap.scrollLeft; /* 同步使用者手動捲動後的位置 */
+      lastTime = null;             /* 避免恢復瞬間因時間差過大而跳動 */
+      paused = false;
+    }, RESUME_DELAY);
+  }
+
+  wrap.addEventListener('mouseenter', pauseIndefinitely, { passive: true });
+  wrap.addEventListener('mouseleave', pauseThenResume, { passive: true });
+  ['pointerdown', 'wheel', 'touchstart'].forEach(function (evt) {
+    wrap.addEventListener(evt, pauseThenResume, { passive: true });
+  });
+
+  var observer = new IntersectionObserver(function (entries) {
+    entries.forEach(function (entry) {
+      inView = entry.isIntersecting;
+      if (inView && rafId === null) {
+        lastTime = null;
+        rafId = requestAnimationFrame(step);
+      }
+    });
+  }, { threshold: 0.2 });
+
+  observer.observe(wrap);
+})();

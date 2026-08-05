@@ -6,6 +6,23 @@
   <meta name="description" content="醫院建院 40 周年大事記暨周年手冊">
   <title>四十載守護，初心如一｜建院 40 周年紀念</title>
 
+  <!-- 瀏覽器分頁圖示：內嵌 SVG，藍底金色十字，對應品牌主色 -->
+  <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='14' fill='%23005689'/%3E%3Cpath d='M28 14h8v14h14v8H36v14h-8V36H14v-8h14z' fill='%23C5A059'/%3E%3C/svg%3E">
+
+  <!-- =====================================================
+       社群分享預覽（Open Graph / Twitter Card）
+       注意：og:image 為相對路徑，正式部署後請改為完整網址（https://...）
+  ====================================================== -->
+  <meta property="og:type" content="website">
+  <meta property="og:locale" content="zh_TW">
+  <meta property="og:title" content="四十載守護，初心如一｜花蓮慈濟醫院建院 40 周年紀念">
+  <meta property="og:description" content="回顧花蓮慈濟醫院四十年大事記、歷史影像與周年手冊，感恩每一位陪伴走過四十年的病患、家屬、志工與醫療夥伴。">
+  <meta property="og:image" content="images/hero-panorama.jpg">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="四十載守護，初心如一｜花蓮慈濟醫院建院 40 周年紀念">
+  <meta name="twitter:description" content="回顧花蓮慈濟醫院四十年大事記、歷史影像與周年手冊，感恩每一位陪伴走過四十年的病患、家屬、志工與醫療夥伴。">
+  <meta name="twitter:image" content="images/hero-panorama.jpg">
+
   <!-- =====================================================
        Step 1｜基礎框架
        全站唯一樣式表，不使用行內 style
@@ -34,9 +51,13 @@
       <nav class="main-nav" aria-label="主要導覽">
         <ul>
           <li><a href="#hero">首頁</a></li>
+          <li><a href="#stats">數字看40年</a></li>
+          <li><a href="#wisdom">上人開示</a></li>
           <li><a href="#timeline">大事記</a></li>
           <li><a href="#flipbook">周年手冊</a></li>
           <li><a href="#history">歲月留影</a></li>
+          <li><a href="#staff">黃金人口</a></li>
+          <li><a href="#stories">生命奇蹟</a></li>
           <li><a href="#archive">典藏特刊</a></li>
         </ul>
       </nav>
@@ -88,6 +109,104 @@
 
 
   <!-- =====================================================
+       數字看 40 年 Section
+       實績亮點統計卡片，素材來源：docs/40th_anniversary.pdf
+  ====================================================== -->
+  <section id="stats" class="section" aria-label="數字看四十年">
+    <div class="container">
+      <h2 class="section-title fade-up" data-delay="0">數字看 40 年</h2>
+      <p class="section-subtitle fade-up" data-delay="80">40 Years by the Numbers</p>
+
+      <div class="stats-grid fade-up" data-delay="160">
+
+        <div class="stat-card">
+          <p class="stat-card__value">
+            <span class="stat-card__prefix">臺灣第</span><span class="stat-card__number">10</span><span class="stat-card__suffix">名</span>
+          </p>
+          <h3 class="stat-card__label">全球最佳醫院 臺灣排名</h3>
+          <p class="stat-card__desc">Newsweek 攜手 Statista 公布 2026 World's Best Hospitals，花蓮慈濟醫院晉升臺灣前 35 大醫院中第 10 名。</p>
+        </div>
+
+        <div class="stat-card">
+          <p class="stat-card__value">
+            <span class="stat-card__number">61</span><span class="stat-card__suffix">項</span>
+          </p>
+          <h3 class="stat-card__label">SNQ 國家品質標章</h3>
+          <p class="stat-card__desc">近 10 年獲生策會 SNQ 國家品質標章認證，肯定各科別照護品質居全國領先水準。</p>
+        </div>
+
+        <div class="stat-card">
+          <p class="stat-card__value">
+            <span class="stat-card__number stat-card__number--text">東臺灣唯一</span>
+          </p>
+          <h3 class="stat-card__label">智慧醫院全機構標章</h3>
+          <p class="stat-card__desc">通過門診、急診、住院、手術照護等六大智慧醫療服務流程標章認證，全東臺灣唯一獲此殊榮的醫院。</p>
+        </div>
+
+        <div class="stat-card">
+          <p class="stat-card__value">
+            <span class="stat-card__number">7,254</span><span class="stat-card__suffix">例</span>
+          </p>
+          <h3 class="stat-card__label">骨髓幹細胞捐贈</h3>
+          <p class="stat-card__desc">自 1993 年成立骨髓捐贈資料中心以來，截至 2026 年 6 月已促成 7,254 例造血幹細胞捐贈，接力延續無數血液病患的生命。</p>
+        </div>
+
+        <div class="stat-card">
+          <p class="stat-card__value">
+            <span class="stat-card__number">21</span><span class="stat-card__suffix">項</span>
+          </p>
+          <h3 class="stat-card__label">國家新創獎</h3>
+          <p class="stat-card__desc">累計獲得 21 項國家新創獎，將臨床研究成果轉化為實際應用，持續深耕創新研發。</p>
+        </div>
+
+        <div class="stat-card">
+          <p class="stat-card__value">
+            <span class="stat-card__prefix">第</span><span class="stat-card__number">6</span><span class="stat-card__suffix">度通過</span>
+          </p>
+          <h3 class="stat-card__label">醫學中心評鑑</h3>
+          <p class="stat-card__desc">2024 年第六度通過醫學中心評鑑，持續肩負東臺灣急重症後送醫院之責。</p>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+
+  <!-- =====================================================
+       上人開示 Section
+       金句摘錄自 docs/40th_anniversary.pdf 開示篇章，做為大事記前的精神引言
+  ====================================================== -->
+  <section id="wisdom" class="section" aria-label="上人開示金句">
+    <div class="container">
+      <h2 class="section-title fade-up" data-delay="0">上人開示</h2>
+      <p class="section-subtitle fade-up" data-delay="80">Words to Walk By</p>
+
+      <div class="quote-grid fade-up" data-delay="160">
+
+        <blockquote class="quote-card">
+          <p class="quote-card__mark" aria-hidden="true">"</p>
+          <p class="quote-card__text">合抱之木，生於毫末；九層之臺，起於累土；千里之行，始於足下。</p>
+          <footer class="quote-card__cite">證嚴上人・〈毫末成合抱　湧泉潤世間〉</footer>
+        </blockquote>
+
+        <blockquote class="quote-card">
+          <p class="quote-card__mark" aria-hidden="true">"</p>
+          <p class="quote-card__text">信己無私，信人有愛。</p>
+          <footer class="quote-card__cite">證嚴上人</footer>
+        </blockquote>
+
+        <blockquote class="quote-card">
+          <p class="quote-card__mark" aria-hidden="true">"</p>
+          <p class="quote-card__text">一個五毛錢，創造慈善奇蹟；一支棉花棒，諦造人間至情。</p>
+          <footer class="quote-card__cite">林靜憪・慈濟基金會副總執行長</footer>
+        </blockquote>
+
+      </div>
+    </div>
+  </section>
+
+
+  <!-- =====================================================
        Step 3｜Timeline Section
        垂直交錯時間軸：奇數項卡片在右、偶數項在左
        捲動動畫：.fade-up + IntersectionObserver（main.js）
@@ -105,7 +224,7 @@
           <button class="tl-era__header" aria-expanded="true">
             <span class="tl-era__label">播種奠基</span>
             <span class="tl-era__range">1972 – 1985</span>
-            <span class="tl-era__count">4 個里程碑</span>
+            <span class="tl-era__count">5 個里程碑</span>
             <span class="tl-era__arrow" aria-hidden="true"></span>
           </button>
           <div class="tl-era__body">
@@ -118,7 +237,7 @@
                 </div>
                 <picture class="tl-milestone__img-wrap">
                   <source srcset="images/1972.webp" type="image/webp">
-                  <img src="images/1972.webp" alt="1986年啟院" class="tl-milestone__img" loading="lazy">
+                  <img src="images/1972.webp" alt="1972年慈濟附設貧民施醫義診所" class="tl-milestone__img" loading="lazy">
                 </picture>
               </li>
               <li class="tl-milestone">
@@ -135,8 +254,8 @@
                   <p class="tl-milestone__text">1983年，花蓮慈濟醫院於國福里首度動土，不料隨後因國防部的「佳山計畫」軍事需求，原定院址被收回，建院計畫被迫中斷。證嚴上人與同仁重新奔走一年多，終於在花蓮農校實習農場（現址）覓得新地，並於隔年4月24日舉行第二次動土典禮，象徵篳路藍縷的醫療願景正式邁入施工階段。</p>
                 </div>
                 <picture class="tl-milestone__img-wrap">
-                  <source srcset="images/1986-founding.webp" type="image/webp">
-                  <img src="images/1986-found.jpg" alt="1986年啟院" class="tl-milestone__img" loading="lazy">
+                  <source srcset="images/1983-GroundbreakingCeremony.webp" type="image/webp">
+                  <img src="images/1983-GroundbreakingCeremony.jpg" alt="1983年花蓮慈濟醫院動土典禮" class="tl-milestone__img" loading="lazy">
                 </picture>
               </li>
               <li class="tl-milestone">
@@ -146,16 +265,23 @@
                   <p class="tl-milestone__text">2月6日完成法人登記，健全行政管理體系。積極進行人才培育，並與台大醫院洽談建教合作，確保啟業後能提供與台北同步之醫療品質。</p>
                 </div>
               </li>
+              <li class="tl-milestone">
+                <span class="tl-milestone__year">1985</span>
+                <div class="tl-milestone__content">
+                  <h3 class="tl-milestone__title">禮聘杜詩綿、曾文賓為首任院長、副院長</h3>
+                  <p class="tl-milestone__text">董事會延攬臺大醫院資深教授杜詩綿、曾文賓分別擔任慈院首任院長與副院長，為隔年啟業的醫療團隊確立領導核心。</p>
+                </div>
+              </li>
             </ul>
           </div>
         </div>
 
-        <!-- ── Era 2｜創院茁壯（1986–1999）4 個里程碑 ── -->
+        <!-- ── Era 2｜創院茁壯（1986–1999）11 個里程碑 ── -->
         <div class="tl-era">
           <button class="tl-era__header" aria-expanded="false">
             <span class="tl-era__label">創院茁壯</span>
             <span class="tl-era__range">1986 – 1999</span>
-            <span class="tl-era__count">4 個里程碑</span>
+            <span class="tl-era__count">11 個里程碑</span>
             <span class="tl-era__arrow" aria-hidden="true"></span>
           </button>
           <div class="tl-era__body">
@@ -172,10 +298,24 @@
                 </picture>
               </li>
               <li class="tl-milestone">
+                <span class="tl-milestone__year">1989</span>
+                <div class="tl-milestone__content">
+                  <h3 class="tl-milestone__title">首任院長杜詩綿病逝，曾文賓繼任第二任院長</h3>
+                  <p class="tl-milestone__text">7月5日杜詩綿院長因肝癌辭世，副院長曾文賓於16日繼任院長，接續帶領醫院穩健成長。</p>
+                </div>
+              </li>
+              <li class="tl-milestone">
                 <span class="tl-milestone__year">1993</span>
                 <div class="tl-milestone__content">
                   <h3 class="tl-milestone__title">慈濟骨髓捐贈資料中心成立</h3>
                   <p class="tl-milestone__text">10月受政府委託成立，致力非親屬骨髓捐贈推廣。將「救人一命，無損己身」轉化為全民運動，使台灣成為全球華人骨髓配對之重鎮。</p>
+                </div>
+              </li>
+              <li class="tl-milestone">
+                <span class="tl-milestone__year">1994</span>
+                <div class="tl-milestone__content">
+                  <h3 class="tl-milestone__title">慈濟醫學院創校</h3>
+                  <p class="tl-milestone__text">醫療志業跨足高等教育，培育東部在地醫學人才，為花東醫療永續發展扎下根基。</p>
                 </div>
               </li>
               <li class="tl-milestone">
@@ -186,10 +326,45 @@
                 </div>
               </li>
               <li class="tl-milestone">
+                <span class="tl-milestone__year">1996</span>
+                <div class="tl-milestone__content">
+                  <h3 class="tl-milestone__title">啟用「心蓮病房」推展安寧照護</h3>
+                  <p class="tl-milestone__text">投入安寧療護服務，以身心靈全人照顧陪伴末期病人與家屬，成為東部安寧照護的重要據點。</p>
+                </div>
+              </li>
+              <li class="tl-milestone">
                 <span class="tl-milestone__year">1997</span>
                 <div class="tl-milestone__content">
                   <h3 class="tl-milestone__title">成功施行首例腎臟移植手術</h3>
                   <p class="tl-milestone__text">器官移植小組在兩次腦死判定後，成功完成東部首例腎臟移植，象徵花蓮慈院在精密外科與後備支持系統上已具備區域領先之實力。</p>
+                </div>
+              </li>
+              <li class="tl-milestone">
+                <span class="tl-milestone__year">1999</span>
+                <div class="tl-milestone__content">
+                  <h3 class="tl-milestone__title">完成東部首例肝臟移植手術</h3>
+                  <p class="tl-milestone__text">器官移植團隊再創里程碑，為東部肝臟移植醫療寫下新頁。</p>
+                </div>
+              </li>
+              <li class="tl-milestone">
+                <span class="tl-milestone__year">1999</span>
+                <div class="tl-milestone__content">
+                  <h3 class="tl-milestone__title">曾文賓卸任，陳英和接任第三任院長</h3>
+                  <p class="tl-milestone__text">曾文賓院長功成身退受聘榮譽院長，由副院長陳英和接任，延續一代接一代的傳承精神。</p>
+                </div>
+              </li>
+              <li class="tl-milestone">
+                <span class="tl-milestone__year">1999</span>
+                <div class="tl-milestone__content">
+                  <h3 class="tl-milestone__title">花蓮玉里慈濟醫院啟業</h3>
+                  <p class="tl-milestone__text">醫療網絡向南延伸，補足花東縱谷南段醫療資源，落實醫療不漏接的照護版圖。</p>
+                </div>
+              </li>
+              <li class="tl-milestone">
+                <span class="tl-milestone__year">1999</span>
+                <div class="tl-milestone__content">
+                  <h3 class="tl-milestone__title">九二一大地震 醫療團隊當天馳援災區</h3>
+                  <p class="tl-milestone__text">集集大地震重創中臺灣，慈院醫療團當天即趕赴災區搶救生命，累積日後歷次震災救援的實戰經驗。</p>
                 </div>
               </li>
             </ul>
@@ -201,7 +376,7 @@
           <button class="tl-era__header" aria-expanded="false">
             <span class="tl-era__label">深化精進</span>
             <span class="tl-era__range">2000 – 2019</span>
-            <span class="tl-era__count">13 個里程碑</span>
+            <span class="tl-era__count">19 個里程碑</span>
             <span class="tl-era__arrow" aria-hidden="true"></span>
           </button>
           <div class="tl-era__body">
@@ -214,8 +389,15 @@
                 </div>
                 <picture class="tl-milestone__img-wrap">
                   <source srcset="images/2006-upgrade.webp" type="image/webp">
-                  <img src="images/2006-upgrade.webp" alt="1986年啟院" class="tl-milestone__img" loading="lazy">
+                  <img src="images/2006-upgrade.jpg" alt="2002年花蓮慈濟醫院升格為醫學中心" class="tl-milestone__img" loading="lazy">
                 </picture>
+              </li>
+              <li class="tl-milestone">
+                <span class="tl-milestone__year">2002</span>
+                <div class="tl-milestone__content">
+                  <h3 class="tl-milestone__title">陳英和榮退，林欣榮接任第四任院長</h3>
+                  <p class="tl-milestone__text">陳英和院長受聘名譽院長，副院長林欣榮接任第四任院長，同年帶領醫院升格為東臺灣第一家醫學中心。</p>
+                </div>
               </li>
               <li class="tl-milestone">
                 <span class="tl-milestone__year">2003</span>
@@ -236,6 +418,13 @@
                 <div class="tl-milestone__content">
                   <h3 class="tl-milestone__title">伊朗巴姆震災國際義診</h3>
                   <p class="tl-milestone__text">12月醫療團隊於災後三天即抵達現場，開啟長達四年的後續關懷，標誌花蓮慈院正式將影響力擴散至國際人道醫療救護領域。</p>
+                </div>
+              </li>
+              <li class="tl-milestone">
+                <span class="tl-milestone__year">2003</span>
+                <div class="tl-milestone__content">
+                  <h3 class="tl-milestone__title">完成首例菲律賓連體嬰分割手術</h3>
+                  <p class="tl-milestone__text">小兒外科團隊跨海評估分割可行性，4月16日接來花蓮完成分割手術，寫下東部醫院執行國際人道醫療的重要里程碑，姊妹倆日後更返臺就讀慈濟大學。</p>
                 </div>
               </li>
               <li class="tl-milestone">
@@ -281,6 +470,20 @@
                 </div>
               </li>
               <li class="tl-milestone">
+                <span class="tl-milestone__year">2014</span>
+                <div class="tl-milestone__content">
+                  <h3 class="tl-milestone__title">發表國際「象腿」醫療成果</h3>
+                  <p class="tl-milestone__text">整形暨重建外科分享5例國際淋巴水腫成功治療案例，其中印尼病患右腿腫脹達65公升、是健康腳的15倍，經手術重獲正常生活，展現守護東南亞疑難重症病患的能力。</p>
+                </div>
+              </li>
+              <li class="tl-milestone">
+                <span class="tl-milestone__year">2016</span>
+                <div class="tl-milestone__content">
+                  <h3 class="tl-milestone__title">林欣榮回任院長 展開品質提升與人才培育新頁</h3>
+                  <p class="tl-milestone__text">證嚴上人交付「品質提升、人才培育」兩大任務，林欣榮院長帶領團隊追求品質與國際化，為日後晉身全球最佳醫院奠定基礎。</p>
+                </div>
+              </li>
+              <li class="tl-milestone">
                 <span class="tl-milestone__year">2016</span>
                 <div class="tl-milestone__content">
                   <h3 class="tl-milestone__title">建立大數據研究中心</h3>
@@ -301,16 +504,30 @@
                   <p class="tl-milestone__text">成為全台首批獲准執行細胞治療之機構，針對幹細胞治療脊髓損傷與退化性關節炎展開臨床應用，開啟再生醫學在東部之實踐。</p>
                 </div>
               </li>
+              <li class="tl-milestone">
+                <span class="tl-milestone__year">2018</span>
+                <div class="tl-milestone__content">
+                  <h3 class="tl-milestone__title">0206 花蓮地震 醫療團隊即刻應變</h3>
+                  <p class="tl-milestone__text">2月6日花蓮強震重創市區多棟大樓，醫院啟動大量傷患應變機制，成為此後歷次震災韌性應變的重要起點。</p>
+                </div>
+              </li>
+              <li class="tl-milestone">
+                <span class="tl-milestone__year">2018</span>
+                <div class="tl-milestone__content">
+                  <h3 class="tl-milestone__title">獲第三屆國際醫療典範獎團體獎</h3>
+                  <p class="tl-milestone__text">骨髓幹細胞中心成立25年、捐贈個案突破5000例，遍布五大洲31國；同年配合新南向政策與菲律賓三家醫院簽署國際醫衛合作備忘錄，醫療影響力正式跨出臺灣。</p>
+                </div>
+              </li>
             </ul>
           </div>
         </div>
 
-        <!-- ── Era 4｜智慧未來（2020–2026）4 個里程碑 ── -->
+        <!-- ── Era 4｜智慧未來（2020–2026）14 個里程碑 ── -->
         <div class="tl-era">
           <button class="tl-era__header" aria-expanded="false">
             <span class="tl-era__label">智慧未來</span>
             <span class="tl-era__range">2020 – 2026</span>
-            <span class="tl-era__count">4 個里程碑</span>
+            <span class="tl-era__count">14 個里程碑</span>
             <span class="tl-era__arrow" aria-hidden="true"></span>
           </button>
           <div class="tl-era__body">
@@ -322,9 +539,23 @@
                   <p class="tl-milestone__text">採用全球先進AI運算系統，疫情期間開發遠距視訊診察與智慧機器人清消，落實「零接觸醫療」並大幅縮短急性心肌梗塞診斷時間。</p>
                 </div>
                 <picture class="tl-milestone__img-wrap">
-                  <source srcset="images/2020AICenter.jpg" type="image/webp">
-                  <img src="images/2020AICenter.jpg" alt="智慧醫院全機構標章" class="tl-milestone__img" loading="lazy">
+                  <source srcset="images/2020AICenter.webp" type="image/webp">
+                  <img src="images/2020AICenter.jpg" alt="2020年成立人工智慧醫療創新發展中心" class="tl-milestone__img" loading="lazy">
                 </picture>
+              </li>
+              <li class="tl-milestone">
+                <span class="tl-milestone__year">2021</span>
+                <div class="tl-milestone__content">
+                  <h3 class="tl-milestone__title">0402 太魯閣號事故 醫療團隊馳援現場</h3>
+                  <p class="tl-milestone__text">列車於清水隧道口出軌，造成重大傷亡，花蓮慈院醫療團隊第一時間趕抵現場協調傷患檢傷與急救，成為東部重大交通事故緊急醫療應變的關鍵一役。</p>
+                </div>
+              </li>
+              <li class="tl-milestone">
+                <span class="tl-milestone__year">2021</span>
+                <div class="tl-milestone__content">
+                  <h3 class="tl-milestone__title">協助印尼完成首例兒童造血幹細胞移植</h3>
+                  <p class="tl-milestone__text">在印尼疫情最嚴峻期間持續培訓當地醫護，11月20日協助印尼慈濟醫院完成首例兒童造血幹細胞移植，幫助罹患重度地中海型貧血的病童重獲新生。</p>
+                </div>
               </li>
               <li class="tl-milestone">
                 <span class="tl-milestone__year">2023</span>
@@ -338,15 +569,71 @@
                 </picture>
               </li>
               <li class="tl-milestone">
+                <span class="tl-milestone__year">2024</span>
+                <div class="tl-milestone__content">
+                  <h3 class="tl-milestone__title">全臺首例CAR-T免疫細胞治療健保給付</h3>
+                  <p class="tl-milestone__text">1月2日為瀰漫性大B細胞淋巴瘤病人完成全臺第一例健保給付CAR-T細胞輸注治療，開啟血癌免疫治療新篇章。</p>
+                </div>
+              </li>
+              <li class="tl-milestone">
+                <span class="tl-milestone__year">2024</span>
+                <div class="tl-milestone__content">
+                  <h3 class="tl-milestone__title">首度登上Newsweek全球最佳醫院榜 臺灣排名第15</h3>
+                  <p class="tl-milestone__text">《Newsweek》攜手Statista公布全球最佳醫院排行，花蓮慈濟醫院於臺灣前35大醫院中排名第15，是六都以外排名最高的醫學中心。</p>
+                </div>
+              </li>
+              <li class="tl-milestone">
+                <span class="tl-milestone__year">2024</span>
+                <div class="tl-milestone__content">
+                  <h3 class="tl-milestone__title">0403花蓮大地震 啟動大量傷患應變機制</h3>
+                  <p class="tl-milestone__text">規模7.2強震重創花蓮，醫院於震後隨即啟動大量傷患機制，當日累計收治75名傷患，展現歷次震災淬鍊出的應變量能。</p>
+                </div>
+              </li>
+              <li class="tl-milestone">
+                <span class="tl-milestone__year">2025</span>
+                <div class="tl-milestone__content">
+                  <h3 class="tl-milestone__title">通過六大服務流程標章 獲頒智慧醫院全機構標章</h3>
+                  <p class="tl-milestone__text">一次通過門診、住院、行政管理、檢驗、急診、手術照護等六大智慧醫療服務流程標章，成為東臺灣唯一獲頒智慧醫院全機構標章的醫療院所。</p>
+                </div>
+              </li>
+              <li class="tl-milestone">
+                <span class="tl-milestone__year">2025</span>
+                <div class="tl-milestone__content">
+                  <h3 class="tl-milestone__title">花蓮縣中西醫合療元年啟動</h3>
+                  <p class="tl-milestone__text">花蓮縣政府攜手花蓮慈院舉辦中西醫合療元年啟動大會，腦傷男童與巴金森病友到場分享康復成果，宣示中西醫精準醫療邁向制度化推廣新階段。</p>
+                </div>
+              </li>
+              <li class="tl-milestone">
+                <span class="tl-milestone__year">2025</span>
+                <div class="tl-milestone__content">
+                  <h3 class="tl-milestone__title">光復鄉洪災 遠距醫療與無人機送藥馳援</h3>
+                  <p class="tl-milestone__text">馬太鞍溪堰塞湖溢流重創光復鄉，醫療團隊9月24日起設立三處醫療站、24小時駐診18天，並完成全臺首例災區「視訊醫療結合無人機送藥」創舉，是近十年韌性醫療機制淬鍊出的具體實踐。</p>
+                </div>
+              </li>
+              <li class="tl-milestone">
                 <span class="tl-milestone__year">2025</span>
                 <div class="tl-milestone__content">
                   <h3 class="tl-milestone__title">0403 震災重建—大愛福利社區落成</h3>
                   <p class="tl-milestone__text">11月15日落成，由慈濟援建，採柱中柱耐震工法，安置受災弱勢民眾，體現醫療志業對地區災後韌性與社會安定的深層承諾。</p>
                 </div>
                 <picture class="tl-milestone__img-wrap">
-                  <source srcset="images/2025GreatLoveWelfareCommunity.jpg" type="image/webp">
+                  <source srcset="images/2025GreatLoveWelfareCommunity.webp" type="image/webp">
                   <img src="images/2025GreatLoveWelfareCommunity.jpg" alt="大愛福利社區落成" class="tl-milestone__img" loading="lazy">
                 </picture>
+              </li>
+              <li class="tl-milestone">
+                <span class="tl-milestone__year">2025</span>
+                <div class="tl-milestone__content">
+                  <h3 class="tl-milestone__title">推出全臺首創AI精準中醫平台「醫王一號」</h3>
+                  <p class="tl-milestone__text">結合基因定序、人工智慧與中醫本草的精準醫療平台正式上線，將中西醫精準醫療從臨床實踐推向系統化、可複製的新階段。</p>
+                </div>
+              </li>
+              <li class="tl-milestone">
+                <span class="tl-milestone__year">2026</span>
+                <div class="tl-milestone__content">
+                  <h3 class="tl-milestone__title">登上Newsweek全球最佳醫院榜 臺灣躍升第10名</h3>
+                  <p class="tl-milestone__text">《Newsweek》攜手Statista公布2026全球最佳醫院排行，花蓮慈濟醫院從2024年臺灣第15名躍升至第10名，醫療專業與照護品質獲國際肯定。</p>
+                </div>
               </li>
               <li class="tl-milestone tl-milestone--highlight">
                 <span class="tl-milestone__year tl-milestone__year--gold">2026</span>
@@ -461,6 +748,193 @@
         <img id="lb-img" src="" alt="">
         <figcaption id="lb-caption"></figcaption>
       </figure>
+    </div>
+  </section>
+
+
+  <!-- =====================================================
+       黃金人口 Section
+       員工人物誌，精選自 docs/40th_anniversary.pdf「黃金人口職場續航」篇章
+  ====================================================== -->
+  <section id="staff" class="section section--alt" aria-label="黃金人口員工人物誌">
+    <div class="container">
+      <h2 class="section-title fade-up" data-delay="0">黃金人口</h2>
+      <p class="section-subtitle fade-up" data-delay="80">Golden Hands, Timeless Care</p>
+      <p class="section-lead fade-up" data-delay="120">花蓮慈院自 2015 年推動「黃金人口計畫」，讓退休同仁得以回聘續任，把最寶貴的經驗與初心，繼續留在崗位上傳承。</p>
+
+      <div class="staff-grid fade-up" data-delay="160">
+
+        <article class="staff-card">
+          <div class="staff-card__meta">
+            <span class="staff-card__tag">總務室警勤組・駕駛</span>
+            <span class="staff-card__years">服務 23 年</span>
+          </div>
+          <h3 class="staff-card__title">「心寬念純」開了 20 幾年的巡迴醫療車</h3>
+          <p class="staff-card__text">張坤昇 42 歲那年因思念花蓮的山海回鄉應徵司機，從 X 光車、乳癌篩檢車開到救護車，穿梭花東大城小鎮。屆齡退休後仍樂於回聘，「希望每天都能開開心心地上班。」</p>
+        </article>
+
+        <article class="staff-card">
+          <div class="staff-card__meta">
+            <span class="staff-card__tag">財務室成本組</span>
+            <span class="staff-card__years">服務 38 年</span>
+          </div>
+          <h3 class="staff-card__title">手寫年代練出的「影印機」精準度</h3>
+          <p class="staff-card__text">陳惠珍在醫院啟業隔年就進入慈院，從批價、病歷申報到會計、成本分析一路歷練，工整細膩的帳務功夫讓同事讚嘆她像台影印機，見證慈院財務體系從無到有的成長。</p>
+        </article>
+
+        <article class="staff-card">
+          <div class="staff-card__meta">
+            <span class="staff-card__tag">牙科部技術員</span>
+            <span class="staff-card__years">服務 34 年</span>
+          </div>
+          <h3 class="staff-card__title">太魯閣族「阿嬌姊」與病魔搏鬥仍堅守崗位</h3>
+          <p class="staff-card__text">何蓮嬌從照顧肺結核病患的護理背景轉入牙科技術領域，2024 年罹患第三期乳癌仍堅持工作到治療前一刻。「我特別體會到上人所說不分宗教的大愛」，抗癌路上依然如花綻放。</p>
+        </article>
+
+        <article class="staff-card">
+          <div class="staff-card__meta">
+            <span class="staff-card__tag">心臟外科・體外循環師</span>
+            <span class="staff-card__years">服務 35 年</span>
+          </div>
+          <h3 class="staff-card__title">心臟手術中「看不見的心肺」守護者</h3>
+          <p class="staff-card__text">郝知欣 35 年前從高雄返鄉，加入剛啟業不久的花蓮慈院心臟外科，操作葉克膜與人工心肺機為病人維繫生命循環。退休後回聘傳承技術，8 年間培訓出 4 位正式體外循環師。</p>
+        </article>
+
+        <article class="staff-card">
+          <div class="staff-card__meta">
+            <span class="staff-card__tag">護理部門診護理師</span>
+            <span class="staff-card__years">服務 27 年</span>
+          </div>
+          <h3 class="staff-card__title">走過一山又一山 把醫療送進秀林部落</h3>
+          <p class="staff-card__text">陳素華護理資歷 41 年，2021 年退休後隨即回聘，主動承擔起秀林鄉山地離島醫療給付計畫，風雨無阻將醫療與藥物準時送到部落，「只要能力所及，我都很樂意配合。」</p>
+        </article>
+
+        <article class="staff-card">
+          <div class="staff-card__meta">
+            <span class="staff-card__tag">人力資源室組員</span>
+            <span class="staff-card__years">黃金人口・兩度回任</span>
+          </div>
+          <h3 class="staff-card__title">兩度離開又歸隊的人資推手</h3>
+          <p class="staff-card__text">石美惠從書記一路歷練成人資專業人員，退休後仍選擇回到慈濟，參與退休回聘、母性保護等多項制度規劃。「因為很愛慈濟，所以想為慈濟做事。」</p>
+        </article>
+
+      </div>
+    </div>
+  </section>
+
+
+  <!-- =====================================================
+       生命奇蹟 Section
+       故事精選自 docs/40th_anniversary.pdf「分秒必爭 締造生命奇蹟」篇章
+       每則故事濃縮為摘要，完整內容導向 #flipbook 互動年冊
+       配圖（images/stories/）皆擷取自特刊內頁的記者會／公開活動照，
+       非臨床情境下拍攝的病患特寫；若日後更換素材，請延續此原則篩選。
+  ====================================================== -->
+  <section id="stories" class="section" aria-label="生命奇蹟故事">
+    <div class="container">
+      <h2 class="section-title fade-up" data-delay="0">生命奇蹟</h2>
+      <p class="section-subtitle fade-up" data-delay="80">Stories of Second Chances</p>
+      <p class="section-lead fade-up" data-delay="120">四十年來，醫護團隊在無數分秒必爭的時刻接力守護生命。以下是近年幾則真實搶救故事。</p>
+
+      <div class="story-grid fade-up" data-delay="160">
+
+        <article class="story-card">
+          <picture class="story-card__img-wrap">
+            <source srcset="images/stories/story-boy-2024.webp" type="image/webp">
+            <img src="images/stories/story-boy-2024.jpg" alt="男孩康復後出席醫院公益活動，與家人一同露出笑容" class="story-card__img" loading="lazy">
+          </picture>
+          <div class="story-card__body">
+            <div class="story-card__meta">
+              <span class="story-card__tag">神經外科・中西醫合療</span>
+              <span class="story-card__year">2024</span>
+            </div>
+            <h3 class="story-card__title">女兒牆意外 7 歲男孩腦重傷奇蹟甦醒</h3>
+            <p class="story-card__text">颱風吹落女兒牆擊中男孩頭部，昏迷指數僅 3 分。神經外科團隊緊急開顱減壓，上人叮囑啟動中西醫合療，針灸與復健接力，男孩從瀕死邊緣站起，隔年重返校園。</p>
+            <a href="#flipbook" class="story-card__link">閱讀完整故事 →</a>
+          </div>
+        </article>
+
+        <article class="story-card">
+          <picture class="story-card__img-wrap">
+            <source srcset="images/stories/story-scs-2024.webp" type="image/webp">
+            <img src="images/stories/story-scs-2024.jpg" alt="曾洺哲手持籃球，站在復健用站立架旁與醫師合影" class="story-card__img" loading="lazy">
+          </picture>
+          <div class="story-card__body">
+            <div class="story-card__meta">
+              <span class="story-card__tag">神經外科・脊髓損傷</span>
+              <span class="story-card__year">2024–2025</span>
+            </div>
+            <h3 class="story-card__title">SCS 脊髓電刺激 癱瘓學生站起來</h3>
+            <p class="story-card__text">車禍導致脊髓嚴重損傷、雙腿失去知覺的護理系學生曾洺哲，植入脊髓電刺激器後找回行動能力，不僅能獨立行走，更順利復學畢業、考取護理師執照。</p>
+            <a href="#flipbook" class="story-card__link">閱讀完整故事 →</a>
+          </div>
+        </article>
+
+        <article class="story-card">
+          <picture class="story-card__img-wrap">
+            <source srcset="images/stories/story-stroke-2025.webp" type="image/webp">
+            <img src="images/stories/story-stroke-2025.jpg" alt="王先生康復後站在曳引機旁，重返農務工作" class="story-card__img" loading="lazy">
+          </picture>
+          <div class="story-card__body">
+            <div class="story-card__meta">
+              <span class="story-card__tag">神經血管介入</span>
+              <span class="story-card__year">2025</span>
+            </div>
+            <h3 class="story-card__title">微創取栓 15 天逆轉腦中風</h3>
+            <p class="story-card__text">27 歲的王先生務農途中突然腦中風昏倒，經綠色通道緊急轉送，醫療團隊成功取出超過 4 公分血栓，術後語言與活動能力完全恢復，15 天內康復出院並重返農務工作。</p>
+            <a href="#flipbook" class="story-card__link">閱讀完整故事 →</a>
+          </div>
+        </article>
+
+        <article class="story-card">
+          <picture class="story-card__img-wrap">
+            <source srcset="images/stories/story-marathon-2022.webp" type="image/webp">
+            <img src="images/stories/story-marathon-2022.jpg" alt="黃先生與醫療團隊在康復成果發表活動上合影，比出愛心手勢" class="story-card__img" loading="lazy">
+          </picture>
+          <div class="story-card__body">
+            <div class="story-card__meta">
+              <span class="story-card__tag">心臟外科・重症照護</span>
+              <span class="story-card__year">2022</span>
+            </div>
+            <h3 class="story-card__title">馬拉松賽道倒下 103 天後重返家人身邊</h3>
+            <p class="story-card__text">參賽選手黃先生跑道上突發心室顫動，急救團隊三度裝上葉克膜，跨越十個醫療科團隊接力搶救。歷經 103 天治療與多次生死交關，終於在元宵節前康復出院，與家人團聚。</p>
+            <a href="#flipbook" class="story-card__link">閱讀完整故事 →</a>
+          </div>
+        </article>
+
+        <article class="story-card">
+          <picture class="story-card__img-wrap">
+            <source srcset="images/stories/story-heart-2023.webp" type="image/webp">
+            <img src="images/stories/story-heart-2023.jpg" alt="花蓮慈濟醫院引進 Impella 人工心臟記者會，醫療團隊合影" class="story-card__img" loading="lazy">
+          </picture>
+          <div class="story-card__body">
+            <div class="story-card__meta">
+              <span class="story-card__tag">心臟內科</span>
+              <span class="story-card__year">2023</span>
+            </div>
+            <h3 class="story-card__title">世界最小人工心臟 搶救猛爆性心肌炎</h3>
+            <p class="story-card__text">53 歲周先生因流感併發猛爆性心肌炎，心臟功能急速衰竭。醫療團隊引進全球最小的暫時性人工心臟 Impella，搭配葉克膜穩定血流，成功幫助他重生出院。</p>
+            <a href="#flipbook" class="story-card__link">閱讀完整故事 →</a>
+          </div>
+        </article>
+
+        <article class="story-card">
+          <picture class="story-card__img-wrap">
+            <source srcset="images/stories/story-ems-network.webp" type="image/webp">
+            <img src="images/stories/story-ems-network.jpg" alt="花蓮慈濟醫院與花蓮縣消防局「攜手救心綠色通道 黃金救援100里程碑」記者會合影" class="story-card__img" loading="lazy">
+          </picture>
+          <div class="story-card__body">
+            <div class="story-card__meta">
+              <span class="story-card__tag">急重症網絡</span>
+              <span class="story-card__year">2020–2024</span>
+            </div>
+            <h3 class="story-card__title">到院前心電圖 五年攜手消防搶救逾百人</h3>
+            <p class="story-card__text">花蓮慈院自 2020 年起與消防局合作到院前心電圖判讀，急性心肌梗塞病人抵院前即啟動綠色通道，讓花蓮縣心肌梗塞救回率從全臺倒數，躍升至全臺第二，五年間挽救逾百條生命。</p>
+            <a href="#flipbook" class="story-card__link">閱讀完整故事 →</a>
+          </div>
+        </article>
+
+      </div>
     </div>
   </section>
 

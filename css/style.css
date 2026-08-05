@@ -384,6 +384,150 @@ ul {
 
 
 /* =====================================================
+   6b. 數字看 40 年（Stats Section）
+===================================================== */
+#stats {
+  background-color: var(--color-primary-dark);
+}
+
+#stats .section-title,
+#stats .section-subtitle {
+  color: var(--color-white);
+}
+
+#stats .section-subtitle {
+  color: var(--color-gold);
+}
+
+.stats-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 2rem;
+  margin-top: 3rem;
+}
+
+.stat-card {
+  text-align: center;
+  padding: 2rem 1.25rem;
+  border-radius: 12px;
+  background: rgba(255, 255, 255, .06);
+  border: 1px solid rgba(255, 255, 255, .14);
+  transition: background var(--transition-base), transform var(--transition-base);
+}
+
+.stat-card:hover {
+  background: rgba(255, 255, 255, .1);
+  transform: translateY(-4px);
+}
+
+.stat-card__value {
+  display: flex;
+  align-items: baseline;
+  justify-content: center;
+  gap: .2rem;
+  line-height: 1.1;
+}
+
+.stat-card__number {
+  font-size: clamp(2rem, 4vw, 2.75rem);
+  font-weight: 900;
+  color: var(--color-gold);
+}
+
+.stat-card__number--text {
+  font-size: clamp(1.4rem, 2.6vw, 1.85rem);
+}
+
+.stat-card__prefix,
+.stat-card__suffix {
+  font-size: 1.05rem;
+  font-weight: 700;
+  color: var(--color-gold);
+}
+
+.stat-card__label {
+  margin-top: .75rem;
+  font-size: 1rem;
+  font-weight: 700;
+  color: var(--color-white);
+}
+
+.stat-card__desc {
+  margin-top: .5rem;
+  font-size: .85rem;
+  line-height: 1.7;
+  color: rgba(255, 255, 255, .65);
+}
+
+@media (max-width: 1023px) {
+  .stats-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+@media (max-width: 767px) {
+  .stats-grid {
+    grid-template-columns: 1fr;
+    gap: 1.25rem;
+  }
+}
+
+
+/* =====================================================
+   6c. 上人開示（Quote Section）
+===================================================== */
+#wisdom .section-title {
+  margin-bottom: .5rem;
+}
+
+.quote-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 3rem;
+  margin-top: 3.5rem;
+}
+
+.quote-card {
+  text-align: center;
+  padding-top: 1.75rem;
+  border-top: 3px solid var(--color-gold);
+}
+
+.quote-card__mark {
+  font-family: Georgia, 'Times New Roman', serif;
+  font-size: 3.5rem;
+  line-height: 1;
+  color: var(--color-gold);
+  margin-bottom: .5rem;
+}
+
+.quote-card__text {
+  font-size: 1.05rem;
+  font-weight: 700;
+  color: var(--color-primary);
+  line-height: 1.9;
+  letter-spacing: .02em;
+}
+
+.quote-card__cite {
+  margin-top: 1rem;
+  font-size: .8rem;
+  font-style: normal;
+  color: var(--color-text-muted);
+  letter-spacing: .05em;
+}
+
+@media (max-width: 1023px) {
+  .quote-grid {
+    grid-template-columns: 1fr;
+    gap: 2.5rem;
+    max-width: 520px;
+    margin-inline: auto;
+  }
+}
+
+
+/* =====================================================
    7. Step 3｜Timeline Section
 ===================================================== */
 #timeline .section-title {
@@ -1077,6 +1221,221 @@ ul {
 @media (max-width: 767px) {
   .history-item       { width: 180px; }
   .history-item img   { height: 140px; }
+}
+
+
+/* =====================================================
+   11b. 生命奇蹟 Section
+===================================================== */
+
+/* Section 導言（置中短文，用於 section-subtitle 之後的補充說明）*/
+.section-lead {
+  max-width: 640px;
+  margin: 1rem auto 0;
+  text-align: center;
+  color: var(--color-text-muted);
+  font-size: .95rem;
+}
+
+.story-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 2rem;
+  margin-top: 3rem;
+}
+
+.story-card {
+  display: flex;
+  flex-direction: column;
+  background-color: var(--color-white);
+  border-radius: 10px;
+  overflow: hidden;
+  box-shadow: var(--shadow-sm);
+  transition: transform var(--transition-base), box-shadow var(--transition-base);
+}
+
+.story-card:hover {
+  transform: translateY(-5px);
+  box-shadow: var(--shadow-lg);
+}
+
+.story-card__img-wrap {
+  aspect-ratio: 4 / 3;
+  overflow: hidden;
+  background-color: var(--color-bg-alt);
+}
+
+.story-card__img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: transform .5s ease;
+}
+
+.story-card:hover .story-card__img {
+  transform: scale(1.05);
+}
+
+.story-card__body {
+  display: flex;
+  flex-direction: column;
+  flex: 1;
+  padding: 1.75rem;
+}
+
+.story-card__meta {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: .75rem;
+  margin-bottom: .9rem;
+}
+
+.story-card__tag {
+  display: inline-block;
+  padding: .2rem .75rem;
+  border-radius: 2px;
+  background-color: var(--color-primary);
+  color: var(--color-white);
+  font-size: .72rem;
+  font-weight: 600;
+  letter-spacing: .05em;
+}
+
+.story-card__year {
+  font-size: .8rem;
+  color: var(--color-gold);
+  font-weight: 700;
+  letter-spacing: .05em;
+  white-space: nowrap;
+}
+
+.story-card__title {
+  font-size: 1.1rem;
+  font-weight: 700;
+  color: var(--color-text);
+  line-height: 1.5;
+  margin-bottom: .75rem;
+}
+
+.story-card__text {
+  flex: 1;
+  font-size: .9rem;
+  color: var(--color-text-muted);
+  line-height: 1.85;
+  margin-bottom: 1.25rem;
+}
+
+.story-card__link {
+  align-self: flex-start;
+  font-size: .875rem;
+  font-weight: 700;
+  color: var(--color-primary);
+  position: relative;
+  padding-bottom: .15rem;
+  border-bottom: 2px solid transparent;
+  transition: border-color var(--transition-base), color var(--transition-base);
+}
+
+.story-card__link:hover,
+.story-card__link:focus-visible {
+  color: var(--color-gold);
+  border-color: var(--color-gold);
+}
+
+@media (max-width: 1023px) {
+  .story-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+@media (max-width: 767px) {
+  .story-grid {
+    grid-template-columns: 1fr;
+    gap: 1.25rem;
+  }
+}
+
+
+/* =====================================================
+   11c. 黃金人口 Section
+===================================================== */
+.staff-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 2rem;
+  margin-top: 3rem;
+}
+
+.staff-card {
+  display: flex;
+  flex-direction: column;
+  background-color: var(--color-white);
+  border-radius: 10px;
+  padding: 1.75rem;
+  box-shadow: var(--shadow-sm);
+  border-top: 4px solid var(--color-gold);
+  transition: transform var(--transition-base), box-shadow var(--transition-base);
+}
+
+.staff-card:hover {
+  transform: translateY(-5px);
+  box-shadow: var(--shadow-lg);
+}
+
+.staff-card__meta {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: .75rem;
+  margin-bottom: .9rem;
+}
+
+.staff-card__tag {
+  display: inline-block;
+  padding: .2rem .75rem;
+  border-radius: 2px;
+  background-color: var(--color-gold);
+  color: var(--color-white);
+  font-size: .72rem;
+  font-weight: 600;
+  letter-spacing: .05em;
+}
+
+.staff-card__years {
+  font-size: .8rem;
+  color: var(--color-primary);
+  font-weight: 700;
+  letter-spacing: .05em;
+  white-space: nowrap;
+}
+
+.staff-card__title {
+  font-size: 1.1rem;
+  font-weight: 700;
+  color: var(--color-text);
+  line-height: 1.5;
+  margin-bottom: .75rem;
+}
+
+.staff-card__text {
+  flex: 1;
+  font-size: .9rem;
+  color: var(--color-text-muted);
+  line-height: 1.85;
+}
+
+@media (max-width: 1023px) {
+  .staff-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+@media (max-width: 767px) {
+  .staff-grid {
+    grid-template-columns: 1fr;
+    gap: 1.25rem;
+  }
 }
 
 
