@@ -35,6 +35,48 @@
 <body>
 
   <!-- =====================================================
+       開場動畫 Intro Splash
+       取材自 40 周年特刊書封分層素材（images/intro/）
+       第一幕：封底全景，小船緩緩滑行（5s）
+       轉場：全暗（1s）
+       第二幕：封面場景，醫院、大船依序登場（5s）
+       ─ 每個瀏覽階段（分頁）只播放一次，記錄於 sessionStorage
+       ─ 可點擊「略過動畫」或按任意鍵跳過
+       ─ 偵測 prefers-reduced-motion 時完全不播放
+       實際播放邏輯見 js/main.js｜initIntroSplash
+  ====================================================== -->
+  <div id="intro-splash" class="intro-splash">
+    <div class="intro-stage">
+
+      <!-- 第一幕｜封底全景 + 小船 -->
+      <div class="intro-act intro-act--1" id="intro-act-1">
+        <img class="intro-act__bg" src="images/intro/act1-bg.webp" alt="" loading="eager">
+        <img class="intro-act__boat" id="intro-boat" src="images/intro/act1-boat.webp" alt="" loading="eager">
+      </div>
+
+      <!-- 轉場｜全暗 -->
+      <div class="intro-blackout" id="intro-blackout"></div>
+
+      <!-- 第二幕｜封面場景：醫院（左）→ 大船（航向右側大海）-->
+      <div class="intro-act intro-act--2" id="intro-act-2">
+        <img class="intro-act__bg" src="images/intro/act2-bg.webp" alt="" loading="eager">
+        <img class="intro-act__hospital" id="intro-hospital" src="images/intro/act2-hospital.webp" alt="" loading="eager">
+        <img class="intro-act__ship" id="intro-ship" src="images/intro/act2-ship.webp" alt="" loading="eager">
+      </div>
+
+    </div>
+
+    <button class="intro-skip" id="intro-skip" type="button">略過動畫</button>
+  </div>
+
+  <!-- 同一瀏覽階段若已播放過開場動畫，立即隱藏，避免換頁/重新整理時閃現 -->
+  <script>
+    if (sessionStorage.getItem('introShown')) {
+      document.getElementById('intro-splash').style.display = 'none';
+    }
+  </script>
+
+  <!-- =====================================================
        Step 2｜Header：固定頂部導覽列
        捲動後由透明漸變為深藍背景（由 JS 控制 .scrolled class）
   ====================================================== -->
@@ -951,20 +993,35 @@
       <h2 class="section-title fade-up" data-delay="0">40 周年手冊</h2>
       <p class="section-subtitle fade-up" data-delay="80">Anniversary Booklet</p>
 
-      <!-- 導讀音訊播放器 -->
-      <div class="podcast-player fade-up" data-delay="120">
-        <div class="podcast-player__info">
-          <span class="podcast-player__icon" aria-hidden="true">🎙</span>
+      <!-- Podcast 專區：翻閱手冊前，先聽兩集深度訪談 -->
+      <div class="podcast-section fade-up" data-delay="120">
+        <div class="podcast-section__intro">
+          <span class="podcast-section__icon" aria-hidden="true">🎙</span>
           <div>
-            <p class="podcast-player__title">40 周年特刊導讀</p>
-            <p class="podcast-player__desc">翻閱前先聽導讀，了解本刊亮點</p>
+            <p class="podcast-section__title">40 周年 Podcast 專區</p>
+            <p class="podcast-section__desc">翻閱手冊前，先聽兩集深度故事，了解本刊亮點</p>
           </div>
         </div>
-        <audio class="podcast-player__audio" controls preload="none">
-          <source src="audio/guide-40th.mp3" type="audio/mpeg">
-          <source src="audio/guide-40th.m4a" type="audio/mp4">
-          您的瀏覽器不支援音訊播放。
-        </audio>
+
+        <div class="podcast-grid">
+          <article class="podcast-card">
+            <span class="podcast-card__tag">EP01</span>
+            <h3 class="podcast-card__title">盤山過嶺的醫療奇蹟：從後山荒漠到世界百強的40年傳奇</h3>
+            <audio class="podcast-card__audio" controls preload="none">
+              <source src="audio/podcast01.m4a" type="audio/mp4">
+              您的瀏覽器不支援音訊播放。
+            </audio>
+          </article>
+
+          <article class="podcast-card">
+            <span class="podcast-card__tag">EP02</span>
+            <h3 class="podcast-card__title">越南阿福重生記超越血緣的生命奇蹟：當越南血癌少年遇見台灣恩人</h3>
+            <audio class="podcast-card__audio" controls preload="none">
+              <source src="audio/podcast02.m4a" type="audio/mp4">
+              您的瀏覽器不支援音訊播放。
+            </audio>
+          </article>
+        </div>
       </div>
 
       <!-- 桌機版翻頁書整體包裝 -->
@@ -982,7 +1039,7 @@
             <p>點擊下方按鈕，即可翻閱完整年冊</p>
           </div>
           <button class="btn btn--gold btn--lg" id="open-flipbook-btn" type="button">
-            開啟互動年冊
+            開啟互動特刊
           </button>
         </div>
 
@@ -1002,7 +1059,7 @@
       <!-- 桌機版下載按鈕（翻頁書下方，永遠顯示）-->
       <div class="flipbook-actions">
         <a href="docs/40th_anniversary.pdf" class="btn btn--outline" download>
-          下載完整 PDF
+          下載40周年特刊PDF
         </a>
       </div>
 
@@ -1010,7 +1067,7 @@
       <div class="flipbook-mobile-fallback">
         <p>手機建議直接下載 PDF 閱覽：</p>
         <a href="docs/40th_anniversary.pdf" class="btn btn--gold" download>
-          下載完整 PDF
+          下載40周年特刊PDF
         </a>
       </div>
 

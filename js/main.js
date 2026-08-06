@@ -13,6 +13,95 @@
 'use strict';
 
 /* =====================================================
+   開場動畫 Intro Splash
+   ─ 取材自 40 周年特刊書封分層素材（images/intro/）
+   ─ 第一幕（0–5s）：封底全景 + 小船滑行
+   ─ 轉場（5–6s）：全暗
+   ─ 第二幕（6–11s）：封面場景，醫院淡入 → 大船航向大海
+   ─ 每個瀏覽階段（sessionStorage）只播放一次；
+     index.html 內已有一段行內 script 在 CSS/其餘 JS 載入前
+     先行隱藏，避免換頁時閃現
+   ─ 可點擊「略過動畫」或按任意鍵跳過
+   ─ 偵測 prefers-reduced-motion 時完全不播放（CSS 亦有防呆）
+===================================================== */
+(function initIntroSplash() {
+  var splash = document.getElementById('intro-splash');
+  if (!splash) return;
+
+  /* 本階段已播放過，或使用者偏好減少動畫 → 直接移除，不執行動畫 */
+  var prefersReduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  if (sessionStorage.getItem('introShown') || prefersReduced) {
+    splash.remove();
+    return;
+  }
+
+  var act1     = document.getElementById('intro-act-1');
+  var act2     = document.getElementById('intro-act-2');
+  var boat     = document.getElementById('intro-boat');
+  var blackout = document.getElementById('intro-blackout');
+  var hospital = document.getElementById('intro-hospital');
+  var ship     = document.getElementById('intro-ship');
+  var skipBtn  = document.getElementById('intro-skip');
+  if (!act1 || !act2 || !boat || !blackout || !hospital || !ship || !skipBtn) {
+    splash.remove();
+    return;
+  }
+
+  document.body.classList.add('intro-active');
+
+  var timers  = [];
+  var finished = false;
+
+  function at(ms, fn) {
+    timers.push(setTimeout(fn, ms));
+  }
+
+  function finish() {
+    if (finished) return;
+    finished = true;
+
+    timers.forEach(clearTimeout);
+    sessionStorage.setItem('introShown', '1');
+    document.body.classList.remove('intro-active');
+
+    splash.classList.add('is-hidden');
+    splash.addEventListener('transitionend', function onEnd() {
+      splash.remove();
+    }, { once: true });
+
+    document.removeEventListener('keydown', onKeydown);
+  }
+
+  function onKeydown() {
+    finish();
+  }
+
+  /* ── 第一幕：封底全景淡入 + 小船滑行（0s–5s）── */
+  act1.classList.add('is-visible');
+  at(150, function () { boat.classList.add('is-sailing'); });
+
+  /* ── 轉場：全暗（5s 開始，維持到 6s）── */
+  at(5000, function () { blackout.classList.add('is-visible'); });
+
+  /* ── 第二幕：封面場景，黑幕淡出（6s）── */
+  at(6000, function () {
+    act1.classList.remove('is-visible');
+    act2.classList.add('is-visible');
+    blackout.classList.remove('is-visible');
+  });
+  at(6600, function () { hospital.classList.add('is-visible'); });
+  at(7400, function () { ship.classList.add('is-visible'); });
+
+  /* ── 全劇終：11s 後淡出整個開場動畫 ── */
+  at(11000, finish);
+
+  skipBtn.addEventListener('click', finish);
+  document.addEventListener('keydown', onKeydown);
+  skipBtn.focus();
+})();
+
+
+/* =====================================================
    Step 2｜Header：捲動超過 80px 後加上 .scrolled
 ===================================================== */
 (function initScrollHeader() {
@@ -145,7 +234,7 @@
 
 /* =====================================================
    Step 5｜DearFlip 延遲初始化
-   ─ 使用者點擊「開啟互動年冊」後才傳輸 PDF，節省院內頻寬
+   ─ 使用者點擊「開啟互動特刊」後才傳輸 PDF，節省院內頻寬
    ─ 依序顯示：觸發按鈕 → 旋轉動畫 → 翻頁書
    ─ 相依：libs/jquery.min.js 、 libs/dflip.min.js（需手動放入）
 ===================================================== */
@@ -162,6 +251,16 @@
 
   openBtn.addEventListener('click', function () {
     if (initialized) return;
+
+    /* ⓪ 以 file:// 直接開啟 index.html 時，瀏覽器會擋掉讀取 PDF 的請求
+         （Cannot access file! 404），翻頁書會卡在「載入中」動畫不會結束。
+         這裡先偵測協定，直接給出明確提示，而非讓使用者誤以為功能壞掉。 */
+    if (window.location.protocol === 'file:') {
+      openBtn.textContent = '請透過本機伺服器開啟本頁（見 README）';
+      openBtn.disabled = true;
+      return;
+    }
+
     initialized = true;
 
     /* ① 切換至載入動畫 */

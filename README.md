@@ -1,6 +1,26 @@
 # 花蓮慈濟醫院・建院 40 周年紀念網站
 
-靜態網頁，無需伺服器框架，直接以瀏覽器開啟 `index.html` 即可預覽。
+靜態網頁，無需伺服器框架。
+
+⚠️ **請勿直接雙擊 `index.html` 開啟**：40 周年手冊的互動翻頁書需要透過 HTTP(S) 讀取 `docs/40th_anniversary.pdf`，若以 `file://` 協定直接開啟，瀏覽器會擋掉這個讀取請求，翻頁書會卡在載入中無法開啟（其餘區塊不受影響）。
+
+本機預覽請在專案根目錄啟動一個簡易伺服器，例如：
+```bash
+python3 -m http.server 8000
+# 開啟 http://localhost:8000
+```
+
+---
+
+## 開場動畫（Intro Splash）
+
+首次進站會先播放約 11 秒的開場動畫，取材自 40 周年特刊書封分層素材（`images/intro/`）：
+
+1. 第一幕（5s）：封底全景，小船緩緩滑行
+2. 轉場（1s）：全暗
+3. 第二幕（5s）：封面場景，醫院淡入 → 大船航向大海
+
+同一瀏覽階段（分頁）只播放一次（`sessionStorage`），可點擊「略過動畫」或按任意鍵跳過，且偵測到 `prefers-reduced-motion` 時完全不播放。播放邏輯見 `js/main.js`｜`initIntroSplash`，時間軸與版面見 `css/style.css`｜「4b. 開場動畫」。
 
 ---
 
@@ -15,7 +35,7 @@
 | 歲月留影 | `#history` | 水平捲軸老照片帶（1983–1998，共 41 張） |
 | 黃金人口 | `#staff` | 資深員工人物誌卡片，摘自 40 周年特刊 |
 | 生命奇蹟 | `#stories` | 精選真實搶救故事卡片，摘自 40 周年特刊 |
-| 40 周年手冊 | `#flipbook` | 導讀音訊播放器 + DearFlip 互動翻頁書 |
+| 40 周年手冊 | `#flipbook` | Podcast 專區（2 集）+ DearFlip 互動翻頁書 |
 | 歷年典藏特刊 | `#archive` | 20、25、30、35 周年特刊封面卡片與 PDF 下載 |
 
 ---
@@ -44,7 +64,8 @@ ai_hospital-40th/
 │   ├── cover-30th.jpg
 │   ├── cover-35th.jpg
 │   ├── history/                 # 老照片（41 張 .webp，命名格式 YYYYMMNNNN）
-│   └── stories/                 # 生命奇蹟配圖，擷取自 40 周年特刊內頁（記者會／公開活動照）
+│   ├── stories/                 # 生命奇蹟配圖，擷取自 40 周年特刊內頁（記者會／公開活動照）
+│   └── intro/                   # 開場動畫素材，取材自特刊書封分層圖檔（背景 × 2、物件 × 3）
 ├── docs/
 │   ├── 40th_anniversary.pdf    # 40 周年手冊（翻頁書來源）
 │   ├── 35th_anniversary.pdf
@@ -52,8 +73,8 @@ ai_hospital-40th/
 │   ├── 25th_anniversary.pdf
 │   └── 20th_anniversary.pdf
 └── audio/
-    ├── guide-40th.mp3          # 40 周年特刊導讀音訊
-    └── guide-40th.m4a          # 備用格式（Safari / iOS）
+    ├── podcast01.m4a           # Podcast EP01：盤山過嶺的醫療奇蹟
+    └── podcast02.m4a           # Podcast EP02：越南阿福重生記
 ```
 
 ---
@@ -95,8 +116,9 @@ ai_hospital-40th/
 </figure>
 ```
 
-### 替換音訊導讀
-將新音檔覆蓋 `audio/guide-40th.mp3`（及 `.m4a`）即可，HTML 不需修改。
+### 新增／替換 Podcast 集數
+- 替換現有集數：將新音檔覆蓋 `audio/podcast01.m4a`（或 `podcast02.m4a`）即可，HTML 不需修改。
+- 新增集數：在 `index.html` 的 `#flipbook` `.podcast-grid` 內複製一個 `.podcast-card`，修改 `EP` 編號、標題與音檔路徑。
 
 ### 新增典藏特刊
 在 `index.html` 的 `#archive` `.archive-grid` 內複製一個 `.archive-card` 並修改封面圖路徑、年份文字、PDF 連結。

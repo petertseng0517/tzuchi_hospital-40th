@@ -18,6 +18,7 @@
   --color-primary-dark:  #003f66;  /* 深藍（hover / Header scrolled）*/
   --color-gold:          #C5A059;  /* 慶典金 */
   --color-gold-dark:     #a8844a;  /* 深金（hover）*/
+  --color-gold-bright:   #E7B94E;  /* 亮慶金：用於慶祝性強的區塊（數字看40年、里程碑highlight），比 --color-gold 更飽和溫暖 */
 
   /* 中性色 */
   --color-white:         #ffffff;
@@ -143,11 +144,11 @@ ul {
   border: 2px solid transparent;
 }
 
-/* 金色實心按鈕（主要 CTA）*/
+/* 金色實心按鈕（主要 CTA）：用亮慶金，讓行動呼籲更有節慶感 */
 .btn--gold {
-  background-color: var(--color-gold);
-  color: var(--color-white);
-  border-color: var(--color-gold);
+  background-color: var(--color-gold-bright);
+  color: var(--color-primary-dark);
+  border-color: var(--color-gold-bright);
 }
 .btn--gold:hover,
 .btn--gold:focus-visible {
@@ -172,6 +173,167 @@ ul {
 .btn--lg {
   padding: 1rem 2.5rem;
   font-size: 1.125rem;
+}
+
+
+/* =====================================================
+   4b. 開場動畫 Intro Splash
+   時間軸（由 js/main.js｜initIntroSplash 控制）：
+     0.0s   第一幕淡入（封底全景 + 小船開始滑行）
+     5.0s   全暗轉場開始
+     6.0s   黑幕淡出，第二幕開始（封面場景）
+     6.6s   醫院淡入
+     7.4s   大船開始航向大海
+     11.0s  整個開場動畫淡出並移除
+===================================================== */
+.intro-splash {
+  position: fixed;
+  inset: 0;
+  z-index: 9999;
+  background-color: #001526;
+  overflow: hidden;
+  opacity: 1;
+  transition: opacity 1s ease;
+}
+
+.intro-splash.is-hidden {
+  opacity: 0;
+  pointer-events: none;
+}
+
+/* 播放期間鎖住背景捲動 */
+body.intro-active {
+  overflow: hidden;
+}
+
+.intro-stage {
+  position: relative;
+  width: 100%;
+  height: 100%;
+}
+
+/* 每一幕（背景 + 前景物件的容器）*/
+.intro-act {
+  position: absolute;
+  inset: 0;
+  opacity: 0;
+  transition: opacity 1s ease;
+}
+
+.intro-act.is-visible {
+  opacity: 1;
+}
+
+.intro-act__bg {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+/* 第一幕｜小船：由左緩緩滑向中右側，貼齊水面 */
+.intro-act__boat {
+  position: absolute;
+  left: 6%;
+  bottom: 4%;
+  width: 20vw;
+  min-width: 160px;
+  max-width: 320px;
+  opacity: 0;
+  transform: translateX(0);
+  transition: opacity 1.5s ease, transform 4.5s ease-in-out;
+}
+
+.intro-act__boat.is-sailing {
+  opacity: 1;
+  transform: translateX(35%);
+}
+
+/* 第二幕｜醫院：畫面左側，緩緩淡入定位（岸邊）*/
+.intro-act__hospital {
+  position: absolute;
+  left: 4%;
+  bottom: 8%;
+  width: 34vw;
+  min-width: 240px;
+  max-width: 560px;
+  opacity: 0;
+  transition: opacity 1.5s ease;
+}
+
+.intro-act__hospital.is-visible {
+  opacity: 1;
+}
+
+/* 第二幕｜大船：從醫院旁（左、較小）航向畫面右側大海（放大定位）*/
+.intro-act__ship {
+  position: absolute;
+  left: 18%;
+  bottom: 6%;
+  width: 16vw;
+  min-width: 140px;
+  max-width: 260px;
+  opacity: 0;
+  transform: translateX(0) scale(.6);
+  transform-origin: bottom left;
+  transition: opacity 1.4s ease, transform 8s ease-in-out;
+}
+
+.intro-act__ship.is-visible {
+  opacity: 1;
+  transform: translateX(30vw) scale(1.15);
+}
+
+/* 轉場｜全暗黑幕 */
+.intro-blackout {
+  position: absolute;
+  inset: 0;
+  z-index: 5;
+  background-color: #000;
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity .5s ease;
+}
+
+.intro-blackout.is-visible {
+  opacity: 1;
+}
+
+/* 略過按鈕 */
+.intro-skip {
+  position: absolute;
+  right: 1.5rem;
+  bottom: 1.5rem;
+  z-index: 10;
+  padding: .6rem 1.25rem;
+  border-radius: 999px;
+  background: rgba(255, 255, 255, .12);
+  border: 1px solid rgba(255, 255, 255, .4);
+  color: var(--color-white);
+  font-size: .85rem;
+  letter-spacing: .05em;
+  cursor: pointer;
+  min-height: 44px;
+  transition: background var(--transition-base), border-color var(--transition-base);
+}
+
+.intro-skip:hover,
+.intro-skip:focus-visible {
+  background: rgba(255, 255, 255, .22);
+  border-color: rgba(255, 255, 255, .7);
+}
+
+@media (max-width: 600px) {
+  .intro-act__boat   { width: 32vw; bottom: 3%; }
+  .intro-act__hospital { width: 52vw; bottom: 14%; }
+  .intro-act__ship   { width: 24vw; bottom: 5%; }
+  .intro-act__ship.is-visible { transform: translateX(40vw) scale(1.2); }
+}
+
+/* 防呆：即使 JS 未及時執行，偏好減少動畫者也不會看到開場動畫 */
+@media (prefers-reduced-motion: reduce) {
+  .intro-splash { display: none !important; }
 }
 
 
@@ -387,7 +549,24 @@ ul {
    6b. 數字看 40 年（Stats Section）
 ===================================================== */
 #stats {
-  background-color: var(--color-primary-dark);
+  position: relative;
+  background: radial-gradient(ellipse 120% 100% at 50% -20%, #0d7bb0 0%, var(--color-primary-dark) 45%, #002b47 100%);
+  overflow: hidden;
+}
+
+/* 溫暖金色光暈：疊加在深藍底色上，呼應「慶典」氛圍但不取代品牌藍 */
+#stats::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background:
+    radial-gradient(circle at 15% 15%, rgba(231, 185, 78, .16) 0%, transparent 40%),
+    radial-gradient(circle at 88% 80%, rgba(231, 185, 78, .14) 0%, transparent 38%);
+  pointer-events: none;
+}
+
+#stats .container {
+  position: relative;
 }
 
 #stats .section-title,
@@ -396,7 +575,7 @@ ul {
 }
 
 #stats .section-subtitle {
-  color: var(--color-gold);
+  color: var(--color-gold-bright);
 }
 
 .stats-grid {
@@ -411,12 +590,13 @@ ul {
   padding: 2rem 1.25rem;
   border-radius: 12px;
   background: rgba(255, 255, 255, .06);
-  border: 1px solid rgba(255, 255, 255, .14);
-  transition: background var(--transition-base), transform var(--transition-base);
+  border: 1px solid rgba(231, 185, 78, .28);
+  transition: background var(--transition-base), border-color var(--transition-base), transform var(--transition-base);
 }
 
 .stat-card:hover {
   background: rgba(255, 255, 255, .1);
+  border-color: rgba(231, 185, 78, .5);
   transform: translateY(-4px);
 }
 
@@ -431,7 +611,8 @@ ul {
 .stat-card__number {
   font-size: clamp(2rem, 4vw, 2.75rem);
   font-weight: 900;
-  color: var(--color-gold);
+  color: var(--color-gold-bright);
+  text-shadow: 0 0 24px rgba(231, 185, 78, .35);
 }
 
 .stat-card__number--text {
@@ -442,7 +623,7 @@ ul {
 .stat-card__suffix {
   font-size: 1.05rem;
   font-weight: 700;
-  color: var(--color-gold);
+  color: var(--color-gold-bright);
 }
 
 .stat-card__label {
@@ -853,12 +1034,12 @@ ul {
 }
 
 .tl-milestone__year--gold {
-  color: var(--color-gold);
+  color: var(--color-gold-dark); /* 文字在淺色卡片上，用深金確保可讀性；亮金留給深色底/裝飾用途 */
 }
 
 .tl-milestone--highlight .tl-milestone__year::before {
-  background-color: var(--color-gold);
-  box-shadow: 0 0 0 2px var(--color-gold);
+  background-color: var(--color-gold-bright);
+  box-shadow: 0 0 0 2px var(--color-gold-bright);
 }
 
 /* 文字區 */
@@ -895,7 +1076,7 @@ ul {
 
 /* 40周年高亮列項 */
 .tl-milestone--highlight .tl-milestone__title {
-  color: var(--color-gold);
+  color: var(--color-gold-dark);
 }
 
 /* ── RWD：手機版 ── */
@@ -1044,47 +1225,90 @@ ul {
 
 
 /* =====================================================
-   9. 導讀播放器
+   9. Podcast 專區
 ===================================================== */
-.podcast-player {
-  display: flex;
-  flex-direction: column;
-  gap: 1rem;
+.podcast-section {
   margin: 2rem auto 0;
-  max-width: 640px;
-  background: var(--color-white);
-  border: 1px solid #dde5ee;
-  border-radius: 12px;
-  padding: 1.25rem 1.5rem;
-  box-shadow: var(--shadow-sm);
+  max-width: 900px;
 }
 
-.podcast-player__info {
+.podcast-section__intro {
   display: flex;
   align-items: center;
   gap: 1rem;
+  margin-bottom: 1.75rem;
 }
 
-.podcast-player__icon {
+.podcast-section__icon {
   font-size: 2rem;
   line-height: 1;
 }
 
-.podcast-player__title {
+.podcast-section__title {
   font-size: 1rem;
   font-weight: 700;
   color: var(--color-primary);
 }
 
-.podcast-player__desc {
+.podcast-section__desc {
   font-size: .85rem;
   color: var(--color-text-muted);
   margin-top: .2rem;
 }
 
-.podcast-player__audio {
+.podcast-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 1.5rem;
+}
+
+.podcast-card {
+  display: flex;
+  flex-direction: column;
+  background: var(--color-white);
+  border: 1px solid #dde5ee;
+  border-radius: 12px;
+  padding: 1.5rem;
+  box-shadow: var(--shadow-sm);
+  transition: box-shadow var(--transition-base), transform var(--transition-base);
+}
+
+.podcast-card:hover {
+  box-shadow: var(--shadow-md);
+  transform: translateY(-4px);
+}
+
+.podcast-card__tag {
+  display: inline-block;
+  align-self: flex-start;
+  padding: .2rem .75rem;
+  border-radius: 2px;
+  background-color: var(--color-primary);
+  color: var(--color-white);
+  font-size: .72rem;
+  font-weight: 700;
+  letter-spacing: .1em;
+  margin-bottom: .9rem;
+}
+
+.podcast-card__title {
+  flex: 1;
+  font-size: 1rem;
+  font-weight: 700;
+  color: var(--color-text);
+  line-height: 1.6;
+  margin-bottom: 1.25rem;
+}
+
+.podcast-card__audio {
   width: 100%;
   accent-color: var(--color-primary);
+}
+
+@media (max-width: 767px) {
+  .podcast-grid {
+    grid-template-columns: 1fr;
+  }
 }
 
 
