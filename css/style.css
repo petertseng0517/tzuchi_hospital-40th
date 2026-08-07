@@ -34,7 +34,7 @@
 
   /* 排版 */
   --font-base:  'Noto Sans TC', 'Microsoft JhengHei', sans-serif;
-  --size-base:  16px;
+  --size-base:  18px;  /* 全站字級基準：由16px調高，讓內文與卡片文字更易讀（rem 換算連動全站） */
   --lh-base:    1.75;
 
   /* 動畫 */
@@ -385,18 +385,23 @@ body.intro-active {
   letter-spacing: .1em;
 }
 
-/* 主導覽 */
+/* 主導覽
+   共 11 個項目，gap／字級刻意收斂（不完全隨全站字級等比放大），
+   確保在桌機寬度（768px 以上皆為橫式導覽，無第二層斷點）不會被擠到換行 */
 .main-nav ul {
   display: flex;
-  gap: 2rem;
+  flex-wrap: nowrap;
+  gap: 1.1rem;
 }
 
 .main-nav a {
+  display: inline-block;
   color: var(--color-white);
   font-weight: 500;
-  font-size: .95rem;
-  letter-spacing: .05em;
+  font-size: .8rem;
+  letter-spacing: .03em;
   padding-block: .25rem;
+  white-space: nowrap;
   position: relative;
 }
 
@@ -414,6 +419,58 @@ body.intro-active {
 .main-nav a:hover::after,
 .main-nav a:focus-visible::after {
   width: 100%;
+}
+
+/* 900px–1023px：橫式導覽仍保留，但 11 個項目偏擠，先收斂間距與字級 */
+@media (max-width: 1023px) {
+  .main-nav ul {
+    gap: .6rem;
+  }
+
+  .main-nav a {
+    font-size: .72rem;
+    letter-spacing: 0;
+  }
+
+  .logo-name {
+    font-size: 1.05rem;
+  }
+}
+
+/* < 900px：即使收斂過，11 個項目 + 院名 Logo 仍會擠壓換行，
+   改用漢堡選單（原本以 767px 為界，現因項目變多而提前） */
+@media (max-width: 899px) {
+  .nav-toggle {
+    display: flex;
+  }
+
+  .main-nav {
+    display: none;           /* 收合；JS 加 .nav-open 展開 */
+    position: fixed;
+    top: var(--header-h);
+    left: 0;
+    right: 0;
+    background-color: var(--color-primary-dark);
+    padding: 1.5rem;
+    box-shadow: var(--shadow-lg);
+  }
+
+  .main-nav.nav-open {
+    display: block;
+  }
+
+  .main-nav ul {
+    flex-direction: column;
+    gap: 0;
+  }
+
+  .main-nav a {
+    display: block;
+    padding-block: .875rem;
+    border-bottom: 1px solid rgba(255, 255, 255, .1);
+    font-size: 1rem;
+    letter-spacing: .05em;
+  }
 }
 
 /* 漢堡按鈕（手機用；桌機隱藏）*/
@@ -469,15 +526,16 @@ body.intro-active {
   background: linear-gradient(135deg, var(--color-primary-dark) 0%, var(--color-primary) 60%, #007ab8 100%);
 }
 
-/* 深色遮罩，確保文字在任何背景圖上均清晰 */
+/* 深色遮罩，確保文字在任何背景圖上均清晰
+   （由深轉淺調整，讓首屏不會一開始就過於昏暗，同時保留底部漸深以襯托文字）*/
 .hero-overlay {
   position: absolute;
   inset: 0;
   background: linear-gradient(
     to bottom,
-    rgba(0, 31, 55, .55) 0%,
-    rgba(0, 31, 55, .70) 60%,
-    rgba(0, 31, 55, .85) 100%
+    rgba(0, 31, 55, .35) 0%,
+    rgba(0, 31, 55, .50) 60%,
+    rgba(0, 31, 55, .70) 100%
   );
 }
 
@@ -496,6 +554,7 @@ body.intro-active {
   color: var(--color-gold);
   text-transform: uppercase;
   margin-bottom: 1rem;
+  text-shadow: 0 1px 8px rgba(0, 0, 0, .5);
 }
 
 .hero-title {
@@ -509,10 +568,11 @@ body.intro-active {
 
 .hero-desc {
   font-size: clamp(1rem, 2vw, 1.25rem);
-  color: rgba(255, 255, 255, .85);
+  color: rgba(255, 255, 255, .9);
   max-width: 520px;
   margin-inline: auto;
   margin-bottom: 2.5rem;
+  text-shadow: 0 1px 8px rgba(0, 0, 0, .5);
 }
 
 /* 向下捲動箭頭 */
@@ -1122,6 +1182,96 @@ body.intro-active {
 
 
 /* =====================================================
+   7b. 歷任院長 Section
+===================================================== */
+.founder-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 2rem;
+  margin-top: 3rem;
+}
+
+.founder-card {
+  display: flex;
+  flex-direction: column;
+  background-color: var(--color-white);
+  border-radius: 10px;
+  padding: 1.75rem;
+  box-shadow: var(--shadow-sm);
+  border-top: 4px solid var(--color-primary);
+  transition: transform var(--transition-base), box-shadow var(--transition-base);
+}
+
+.founder-card:hover {
+  transform: translateY(-5px);
+  box-shadow: var(--shadow-lg);
+}
+
+/* 現任院長：以金色標示區隔於歷任名錄 */
+.founder-card--current {
+  border-top-color: var(--color-gold);
+}
+
+.founder-card--current .founder-card__tag {
+  background-color: var(--color-gold);
+}
+
+.founder-card__meta {
+  display: flex;
+  flex-direction: column;
+  gap: .3rem;
+  margin-bottom: .9rem;
+}
+
+.founder-card__tag {
+  display: inline-block;
+  align-self: flex-start;
+  padding: .2rem .75rem;
+  border-radius: 2px;
+  background-color: var(--color-primary);
+  color: var(--color-white);
+  font-size: .72rem;
+  font-weight: 600;
+  letter-spacing: .05em;
+}
+
+.founder-card__years {
+  font-size: .8rem;
+  color: var(--color-text-muted);
+  font-weight: 600;
+  letter-spacing: .03em;
+}
+
+.founder-card__title {
+  font-size: 1.35rem;
+  font-weight: 700;
+  color: var(--color-text);
+  line-height: 1.5;
+  margin-bottom: .75rem;
+}
+
+.founder-card__text {
+  flex: 1;
+  font-size: .9rem;
+  color: var(--color-text-muted);
+  line-height: 1.85;
+}
+
+@media (max-width: 1023px) {
+  .founder-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+@media (max-width: 767px) {
+  .founder-grid {
+    grid-template-columns: 1fr;
+    gap: 1.25rem;
+  }
+}
+
+
+/* =====================================================
    9. Step 5｜Flipbook Section
 ===================================================== */
 
@@ -1725,6 +1875,88 @@ body.intro-active {
 
 
 /* =====================================================
+   10b. 慈院選書 Section
+===================================================== */
+.book-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 2rem;
+  margin-top: 3rem;
+}
+
+.book-card {
+  display: flex;
+  flex-direction: column;
+  background: var(--color-white);
+  border-radius: 12px;
+  box-shadow: var(--shadow-sm);
+  overflow: hidden;
+  transition: box-shadow var(--transition-base), transform var(--transition-base);
+}
+
+.book-card:hover {
+  box-shadow: var(--shadow-md);
+  transform: translateY(-4px);
+}
+
+.book-card__cover {
+  aspect-ratio: 3 / 4;
+  overflow: hidden;
+}
+
+.book-card__cover img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: transform .4s ease;
+}
+
+.book-card:hover .book-card__cover img {
+  transform: scale(1.04);
+}
+
+.book-card__body {
+  padding: 1.25rem 1.5rem 1.5rem;
+  display: flex;
+  flex-direction: column;
+  gap: .4rem;
+}
+
+.book-card__title {
+  font-size: 1.1rem;
+  font-weight: 700;
+  color: var(--color-primary);
+  line-height: 1.4;
+}
+
+.book-card__subtitle {
+  font-size: .85rem;
+  color: var(--color-text-muted);
+  line-height: 1.6;
+}
+
+.book-card__author {
+  font-size: .78rem;
+  color: var(--color-gold-dark);
+  font-weight: 600;
+  letter-spacing: .03em;
+}
+
+@media (max-width: 1023px) {
+  .book-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+@media (max-width: 767px) {
+  .book-grid {
+    grid-template-columns: 1fr;
+    gap: 1.25rem;
+  }
+}
+
+
+/* =====================================================
    10. Footer
 ===================================================== */
 #site-footer {
@@ -1734,6 +1966,28 @@ body.intro-active {
   padding-block: 1.5rem;
   font-size: .875rem;
   letter-spacing: .05em;
+}
+
+.footer-links {
+  display: flex;
+  justify-content: center;
+  flex-wrap: wrap;
+  gap: 1.5rem;
+  margin-bottom: 1rem;
+}
+
+.footer-links__item {
+  color: rgba(255, 255, 255, .85);
+  font-size: .875rem;
+  letter-spacing: .03em;
+  border-bottom: 1px solid transparent;
+  transition: border-color var(--transition-base), color var(--transition-base);
+}
+
+.footer-links__item:hover,
+.footer-links__item:focus-visible {
+  color: var(--color-gold);
+  border-color: var(--color-gold);
 }
 
 
@@ -1780,38 +2034,6 @@ body.intro-active {
    12. RWD 斷點 — 手機 (< 768px)
 ===================================================== */
 @media (max-width: 767px) {
-
-  /* Header：顯示漢堡鈕，隱藏橫向導覽 */
-  .nav-toggle {
-    display: flex;
-  }
-
-  .main-nav {
-    display: none;           /* 收合；JS 加 .nav-open 展開 */
-    position: fixed;
-    top: var(--header-h);
-    left: 0;
-    right: 0;
-    background-color: var(--color-primary-dark);
-    padding: 1.5rem;
-    box-shadow: var(--shadow-lg);
-  }
-
-  .main-nav.nav-open {
-    display: block;
-  }
-
-  .main-nav ul {
-    flex-direction: column;
-    gap: 0;
-  }
-
-  .main-nav a {
-    display: block;
-    padding-block: .875rem;
-    border-bottom: 1px solid rgba(255, 255, 255, .1);
-    font-size: 1rem;
-  }
 
   /* ── Timeline：單欄靠左排列 ── */
   /* 軸線移到最左側 */
@@ -1862,6 +2084,14 @@ body.intro-active {
   /* Hero：行動裝置文字左對齊，提升閱讀舒適度 */
   .hero-content {
     text-align: left;
+  }
+
+  /* 標題原本的 clamp() 下限（2.25rem）在窄螢幕上會大於 6vw 換算值，
+     導致中文標題被迫換行；改用更貼近可視寬度的係數與較小下限，
+     並收斂字距，確保單行可容納「四十載守護，初心如一」十個字 */
+  .hero-title {
+    font-size: clamp(1.4rem, 7.2vw, 2.75rem);
+    letter-spacing: .03em;
   }
 
   .hero-desc {

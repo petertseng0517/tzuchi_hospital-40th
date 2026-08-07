@@ -17,3 +17,6 @@ audio/
 
 # Python 虛擬環境
 .venv/
+
+# Claude Code 本機工具設定（含機器專屬路徑，不應進版控）
+.claude/
