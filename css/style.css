@@ -1990,6 +1990,23 @@ body.intro-active {
   border-color: var(--color-gold);
 }
 
+.footer-credit {
+  margin-top: .5rem;
+  font-size: .75rem;
+  color: rgba(255, 255, 255, .5);
+}
+
+.footer-credit a {
+  border-bottom: 1px solid transparent;
+  transition: border-color var(--transition-base), color var(--transition-base);
+}
+
+.footer-credit a:hover,
+.footer-credit a:focus-visible {
+  color: var(--color-gold);
+  border-color: var(--color-gold);
+}
+
 
 /* =====================================================
    10. 捲動觸發動畫（IntersectionObserver 驅動）
