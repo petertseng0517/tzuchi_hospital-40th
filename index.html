@@ -140,13 +140,62 @@
       <p class="hero-eyebrow">建院 40 周年紀念</p>
       <h1 class="hero-title">四十載守護，初心如一</h1>
       <p class="hero-desc">感恩每一位陪伴我們走過四十年的病患、家屬、志工與醫療夥伴。</p>
-      <a href="#timeline" class="btn btn--gold btn--lg">大事記探索</a>
+      <div class="hero-actions">
+        <a href="#timeline" class="btn btn--gold btn--lg">大事記探索</a>
+        <a href="https://event.tzuchiculture.org/htch40/"
+           class="btn btn--ghost btn--lg"
+           target="_blank" rel="noopener">
+          盤山過嶺專題
+          <span class="ext-icon" aria-hidden="true">↗</span>
+          <span class="sr-only">（另開新視窗）</span>
+        </a>
+      </div>
     </div>
 
     <!-- 向下捲動提示箭頭 -->
     <a href="#timeline" class="scroll-hint" aria-label="向下捲動">
       <span class="scroll-hint__arrow" aria-hidden="true"></span>
     </a>
+
+  </section>
+
+
+  <!-- =====================================================
+       合作專題 Banner｜慈濟人文志業中心「盤山過嶺」
+       全寬深色橫幅，接在 Hero 之後作為全站第一個內容區塊，
+       確保合作單位的專題網站有足夠曝光版位。
+       背景暫用院景全景圖 + 深色遮罩；日後若取得專題橫式主視覺，
+       只需置換 <picture> 內的 srcset / src 即可。
+  ====================================================== -->
+  <section id="feature-site" class="feature-site" aria-label="合作專題網站">
+
+    <picture class="feature-site__bg" aria-hidden="true">
+      <source srcset="images/hero-panorama.webp" type="image/webp">
+      <img src="images/hero-panorama.jpg" alt="" loading="lazy">
+    </picture>
+
+    <div class="feature-site__overlay" aria-hidden="true"></div>
+
+    <div class="container feature-site__inner">
+      <p class="feature-site__eyebrow fade-up" data-delay="0">
+        慈濟人文志業中心 · 專題報導
+      </p>
+      <h2 class="feature-site__title fade-up" data-delay="80">
+        花蓮慈院 40<span class="nowrap">「盤山過嶺」</span>
+      </h2>
+      <p class="feature-site__desc fade-up" data-delay="160">
+        翻山越嶺四十載，從一方病床到守護東臺灣的醫療重鎮。
+        由慈濟人文志業中心製作的專題網站，以影音與深度報導，
+        記錄這段盤山過嶺的來時路。
+      </p>
+      <a href="https://event.tzuchiculture.org/htch40/"
+         class="btn btn--gold btn--lg feature-site__cta fade-up" data-delay="240"
+         target="_blank" rel="noopener">
+        前往專題網站
+        <span class="ext-icon" aria-hidden="true">↗</span>
+        <span class="sr-only">（另開新視窗）</span>
+      </a>
+    </div>
 
   </section>
 
@@ -1246,6 +1295,12 @@
     <div class="container">
       <nav class="footer-links" aria-label="相關志業體連結">
         <a href="https://hlm.tzuchi.com.tw/" class="footer-links__item">花蓮慈濟醫院官網</a>
+        <a href="https://event.tzuchiculture.org/htch40/" class="footer-links__item"
+           target="_blank" rel="noopener">
+          花蓮慈院 40「盤山過嶺」專題
+          <span class="ext-icon" aria-hidden="true">↗</span>
+          <span class="sr-only">（另開新視窗）</span>
+        </a>
       </nav>
       <p>&copy; <span id="footer-year"></span> 花蓮慈濟醫院 版權所有</p>
       <p class="footer-credit">開發者：<a href="https://www.petertseng.me/" target="_blank" rel="noopener">公共傳播室 曾建瑋</a></p>
